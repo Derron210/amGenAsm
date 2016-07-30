@@ -1,0 +1,2 @@
+avrdude -p Atmega8 -c usbasp -U flash:w:amAsm2.hex
+

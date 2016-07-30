@@ -1,4 +1,4 @@
-﻿TIMER_1_COMP_A:
+TIMER_1_COMP_A:
 	lds		ZL,		TIMER_1_COMP_A_vect
 	lds		ZH,		TIMER_1_COMP_A_vect+1
 ijmp
