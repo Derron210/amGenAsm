@@ -1,4 +1,4 @@
-﻿TIMER_1_COMP_A:
+TIMER_1_COMP_A:
 	lds		ZL,		TIMER_1_COMP_A_vect
 	lds		ZH,		TIMER_1_COMP_A_vect+1
 ijmp
@@ -109,9 +109,9 @@ ret
 ; ;//			0 :n	- ничего не делать
 ; ;//			11:x    - вернуть аналоговый режим
 ; ;//			22:x	- цифровое управление, режим x;
-; ;//			44:n	- записать данные в R18
-; ;//			55:n    - записать в OCR1A
-; ;//			66:n	- записать в OCR1B
+; ;//			30:x	- записать амплитуду несущей (CARAR) 
+; ;//			31:n    - записать частоту несущей (T1NVR (OCR1A))
+; ;//			32:n	- записать частоту инф.сигнала (T2NVR (OCR2))
 ; USART_RX:
 ; USART_RECV1:			;//Считываем 1ый байт
 ; 	sbis UCSRA, RXC
@@ -191,23 +191,31 @@ SKTP:
 	cpi		GENI1,	22
 	BREQ	setdMOde
 
-	cpi		GENI1,	44
-	BREQ	writeReg
+	cpi		GENI1,	30
+	BREQ	writeCARAR
 
-	cpi		GENI1,	55
-	BREQ	writeFreq
+	cpi		GENI1,	31
+	BREQ	writeT1NVR
 
-	cpi		GENI1,	66
-	BREQ	writePLen
+	cpi		GENI1,	32
+	BREQ	writeT2NVR
 
 	rjmp INT_PREP_EX
 
+writeCARAR:
+	mov		CARAR,	GENI2
+	rjmp	INT_PREP_EX
+
 setdMode:
 	;//Очищаем стек
+	rcall STOP_ALL
+	
 	ldi GENI1,	0
 	out GICR,	GENI1
-
-	rcall STOP_ALL
+	
+	ldi		GENR1,	0b10000000		;В GENR1 содержится инф. о источнике инф. сигнала
+	and		GENR1,	GENI2			;Передаем ее с ПК в старшем бите команды
+	andi	GENI2,	0b01111111	
 
 	cpi GENI2,	1
 	BRNE dmd1
@@ -225,16 +233,12 @@ setAmode:
 	out GICR,	GENI1	
 	;rjmp amode1	
 
-writeReg:
-	mov		CARAR,	GENI2
-	rjmp	INT_PREP_EX
-
-WriteFreq:
+writeT1NVR:
 	mov		T1NVR,	GENI2
 	rjmp	INT_PREP_EX
 
-WritePLen:
-	out		OCR1BL,	GENI2
+writeT2NVR:
+	mov		T2NVR,	GENI2
 	rjmp	INT_PREP_EX
 
 INT_PREP_EX:
