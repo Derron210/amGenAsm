@@ -1,22 +1,22 @@
 
-AVRASM ver. 2.1.57  C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm Fri Jul 22 01:46:50 2016
+AVRASM ver. 2.1.57  C:\Users\Derron\Documents\amGenAsm\amAsm2\amAsm2.asm Tue Aug 16 02:16:37 2016
 
-[builtin](2): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m8def.inc'
-C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(1): Including file 'C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR Assembler\Native\2.1.1175\avrassembler\Include\m8def.inc'
-C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(80): Including file 'C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\dmodes.asm'
-C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Including file 'C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\uInterrupts.asm'
+[builtin](2): Including file 'C:\Users\Derron\Documents\amGenAsm\amAsm2\m8def.inc'
+C:\Users\Derron\Documents\amGenAsm\amAsm2\amAsm2.asm(1): Including file 'C:\Users\Derron\Documents\amGenAsm\amAsm2\m8def.inc'
+C:\Users\Derron\Documents\amGenAsm\amAsm2\amAsm2.asm(80): Including file 'C:\Users\Derron\Documents\amGenAsm\amAsm2\dmodes.asm'
+C:\Users\Derron\Documents\amGenAsm\amAsm2\amAsm2.asm(82): Including file 'C:\Users\Derron\Documents\amGenAsm\amAsm2\uInterrupts.asm'
                  
                  .include "m8def.inc"
                  
-                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8.xml *************
+                 ;***** Created: 2005-01-11 10:31 ******* Source: ATmega8.xml *************
                  ;*************************************************************************
                  ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
                  ;* 
                  ;* Number            : AVR000
                  ;* File Name         : "m8def.inc"
                  ;* Title             : Register/Bit Definitions for the ATmega8
-                 ;* Date              : 2011-02-09
-                 ;* Version           : 2.35
+                 ;* Date              : 2005-01-11
+                 ;* Version           : 2.14
                  ;* Support E-mail    : avr@atmel.com
                  ;* Target MCU        : ATmega8
                  ;* 
@@ -67,8 +67,8 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  ; Definitions marked "MEMORY MAPPED"are extended I/O ports
                  ; and cannot be used with IN/OUT instructions
                  .equ	SREG	= 0x3f
-                 .equ	SPL	= 0x3d
                  .equ	SPH	= 0x3e
+                 .equ	SPL	= 0x3d
                  .equ	GICR	= 0x3b
                  .equ	GIFR	= 0x3a
                  .equ	TIMSK	= 0x39
@@ -83,14 +83,14 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  .equ	SFIOR	= 0x30
                  .equ	TCCR1A	= 0x2f
                  .equ	TCCR1B	= 0x2e
-                 .equ	TCNT1L	= 0x2c
                  .equ	TCNT1H	= 0x2d
-                 .equ	OCR1AL	= 0x2a
+                 .equ	TCNT1L	= 0x2c
                  .equ	OCR1AH	= 0x2b
-                 .equ	OCR1BL	= 0x28
+                 .equ	OCR1AL	= 0x2a
                  .equ	OCR1BH	= 0x29
-                 .equ	ICR1L	= 0x26
+                 .equ	OCR1BL	= 0x28
                  .equ	ICR1H	= 0x27
+                 .equ	ICR1L	= 0x26
                  .equ	TCCR2	= 0x25
                  .equ	TCNT2	= 0x24
                  .equ	OCR2	= 0x23
@@ -98,8 +98,8 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  .equ	WDTCR	= 0x21
                  .equ	UBRRH	= 0x20
                  .equ	UCSRC	= 0x20
-                 .equ	EEARL	= 0x1e
                  .equ	EEARH	= 0x1f
+                 .equ	EEARL	= 0x1e
                  .equ	EEDR	= 0x1d
                  .equ	EECR	= 0x1c
                  .equ	PORTB	= 0x18
@@ -121,8 +121,8 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  .equ	ACSR	= 0x08
                  .equ	ADMUX	= 0x07
                  .equ	ADCSRA	= 0x06
-                 .equ	ADCL	= 0x04
                  .equ	ADCH	= 0x05
+                 .equ	ADCL	= 0x04
                  .equ	TWDR	= 0x03
                  .equ	TWAR	= 0x02
                  .equ	TWSR	= 0x01
@@ -237,7 +237,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  .equ	FOC1A	= 3	; Force Output Compare 1A
                  .equ	COM1B0	= 4	; Compare Output Mode 1B, bit 0
                  .equ	COM1B1	= 5	; Compare Output Mode 1B, bit 1
-                 .equ	COM1A0	= 6	; Compare Ouput Mode 1A, bit 0
+                 .equ	COM1A0	= 6	; Comparet Ouput Mode 1A, bit 0
                  .equ	COM1A1	= 7	; Compare Output Mode 1A, bit 1
                  
                  ; TCCR1B - Timer/Counter1 Control Register B
@@ -747,15 +747,15 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  ; ***** END OF FILE ******************************************************
                  
                  
-                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8.xml *************
+                 ;***** Created: 2005-01-11 10:31 ******* Source: ATmega8.xml *************
                  ;*************************************************************************
                  ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
                  ;* 
                  ;* Number            : AVR000
                  ;* File Name         : "m8def.inc"
                  ;* Title             : Register/Bit Definitions for the ATmega8
-                 ;* Date              : 2011-02-09
-                 ;* Version           : 2.35
+                 ;* Date              : 2005-01-11
+                 ;* Version           : 2.14
                  ;* Support E-mail    : avr@atmel.com
                  ;* Target MCU        : ATmega8
                  ;* 
@@ -790,7 +790,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  
                  ; ***** END OF FILE ******************************************************
                  
-                 ;Таблица векторов прерываний
+                 ;РўР°Р±Р»РёС†Р° РІРµРєС‚РѕСЂРѕРІ РїСЂРµСЂС‹РІР°РЅРёР№
                  ;***********************************
 000000 c02b      .org 0x000	rjmp START
 000003 c09d      .org 0x003	rjmp TIMER_2_COMP
@@ -802,7 +802,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  
                  .cseg
                  
-                 ;Массив значений синусоиды
+                 ;РњР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёР№ СЃРёРЅСѓСЃРѕРёРґС‹
                  ;***********************************
                  SINAR:
 00000c 0c00
@@ -839,27 +839,27 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 00002b f4e7      .db -90, -81, -71, -60, -49, -37, -25, -12
                  ;***********************************
                  
-                 ;Константы
+                 ;РљРѕРЅСЃС‚Р°РЅС‚С‹
                  ;***********************************
-                 .equ	BUFHEADER		=	150			;Заголовок пакета UART
-                 .equ   MODE_INTGEN		=	7			;НОМЕР бита регистра MOEDER, 0-внешний сигнал, 1- внутрений
-                 .equ   ARRAY_SIZE		=	64			;Размер массива значений синусоиды
+                 .equ	BUFHEADER		=	150			;Р—Р°РіРѕР»РѕРІРѕРє РїР°РєРµС‚Р° UART
+                 .equ   MODE_INTGEN		=	7			;РќРћРњР•Р  Р±РёС‚Р° СЂРµРіРёСЃС‚СЂР° MOEDER, 0-РІРЅРµС€РЅРёР№ СЃРёРіРЅР°Р», 1- РІРЅСѓС‚СЂРµРЅРёР№
+                 .equ   ARRAY_SIZE		=	64			;Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР° Р·РЅР°С‡РµРЅРёР№ СЃРёРЅСѓСЃРѕРёРґС‹
                  ;***********************************
                  
-                 ;Объявления регистров
+                 ;РћР±СЉСЏРІР»РµРЅРёСЏ СЂРµРіРёСЃС‚СЂРѕРІ
                  ;***********************************
-                 .def	NULL  =	R2						;Константа равная 0, нужна для того, чтобы не использовать РОН для арифм. операций
-                 .def	T1NVR = R3						;2 регистра, содержажие частоту таймеров 1 и 2, которая установиться во время следующего прерывания 
+                 .def	NULL  =	R2						;РљРѕРЅСЃС‚Р°РЅС‚Р° СЂР°РІРЅР°СЏ 0, РЅСѓР¶РЅР° РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р РћРќ РґР»СЏ Р°СЂРёС„Рј. РѕРїРµСЂР°С†РёР№
+                 .def	T1NVR = R3						;2 СЂРµРіРёСЃС‚СЂР°, СЃРѕРґРµСЂР¶Р°Р¶РёРµ С‡Р°СЃС‚РѕС‚Сѓ С‚Р°Р№РјРµСЂРѕРІ 1 Рё 2, РєРѕС‚РѕСЂР°СЏ СѓСЃС‚Р°РЅРѕРІРёС‚СЊСЃСЏ РІРѕ РІСЂРµРјСЏ СЃР»РµРґСѓСЋС‰РµРіРѕ РїСЂРµСЂС‹РІР°РЅРёСЏ 
                  .def	T2NVR = R4
-                 .def	MSIGR = R5						;Знач. внутреннего инф. сигнала
-                 .def	CARAR = R6						;Регистр содержит амлпитуду несущей - [0; 127] 0 - макс. значение
+                 .def	MSIGR = R5						;Р—РЅР°С‡. РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РёРЅС„. СЃРёРіРЅР°Р»Р°
+                 .def	CARAR = R6						;Р РµРіРёСЃС‚СЂ СЃРѕРґРµСЂР¶РёС‚ Р°РјР»РїРёС‚СѓРґСѓ РЅРµСЃСѓС‰РµР№ - [0; 127] 0 - РјР°РєСЃ. Р·РЅР°С‡РµРЅРёРµ
                  .def	SIGAR = R7
-                 .def	STATR = R15						;Выбор источника информационного сигнала
-                 .def	GENI1 = R16						;Три регистра общего назначения для ПРЕРЫВАНИЙ
+                 .def	STATR = R15						;Р’С‹Р±РѕСЂ РёСЃС‚РѕС‡РЅРёРєР° РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+                 .def	GENI1 = R16						;РўСЂРё СЂРµРіРёСЃС‚СЂР° РѕР±С‰РµРіРѕ РЅР°Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РџР Р•Р Р«Р’РђРќРР™
                  .def	GENI2 = R17
                  .def	GENI3 = R18
-                 .def	BUFPR = R19						;Указатель буфера uart
-                 .def	GENR1 =	R20						;Три регистра общего назначения для ПРОГРАММЫ
+                 .def	BUFPR = R19						;РЈРєР°Р·Р°С‚РµР»СЊ Р±СѓС„РµСЂР° uart
+                 .def	GENR1 =	R20						;РўСЂРё СЂРµРіРёСЃС‚СЂР° РѕР±С‰РµРіРѕ РЅР°Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РџР РћР“Р РђРњРњР«
                  .def	GENR2 =	R21
                  .def	GENR3 = R22
                  ;***********************************
@@ -867,15 +867,15 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  START:
 00002c 2422      	clr		NULL
                  	
-                 	;Настройка стека
-00002d e54f      	ldi		GENR1,		low(RAMEND)			; Загрузка в регистр GENR1 адреса верхней границы ОЗУ
-00002e bf4d      	out		SPL,		GENR1				;Копирование значения из GENR1 в регистр указателя стека SPL
+                 	;РќР°СЃС‚СЂРѕР№РєР° СЃС‚РµРєР°
+00002d e54f      	ldi		GENR1,		low(RAMEND)			; Р—Р°РіСЂСѓР·РєР° РІ СЂРµРіРёСЃС‚СЂ GENR1 Р°РґСЂРµСЃР° РІРµСЂС…РЅРµР№ РіСЂР°РЅРёС†С‹ РћР—РЈ
+00002e bf4d      	out		SPL,		GENR1				;РљРѕРїРёСЂРѕРІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РёР· GENR1 РІ СЂРµРіРёСЃС‚СЂ СѓРєР°Р·Р°С‚РµР»СЏ СЃС‚РµРєР° SPL
 00002f e044      	ldi		GENR1,		high(RAMEND)
 000030 bf4e      	out		SPH,		GENR1
                  
-000031 d0cd      	rcall	LOAD_ARRAY		;Грузим значения синусоиды в ОЗУ
+000031 d0d5      	rcall	LOAD_ARRAY		;Р“СЂСѓР·РёРј Р·РЅР°С‡РµРЅРёСЏ СЃРёРЅСѓСЃРѕРёРґС‹ РІ РћР—РЈ
                  
-                 	;Настройка USART
+                 	;РќР°СЃС‚СЂРѕР№РєР° USART
 000032 e647      	ldi		GENR1,		103
 000033 e050      	ldi		GENR2,		0
 000034 bd50      	out		UBRRH,		GENR2
@@ -885,7 +885,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 000038 e84e      	ldi		GENR1,		(1<<URSEL)|(1<<USBS)|(3<<UCSZ0);
 000039 bd40      	out		UCSRC,		GENR1
                  
-                 	;Настройка PORTB
+                 	;РќР°СЃС‚СЂРѕР№РєР° PORTB
 00003a e35f      	ldi		GENR2,	0b00111111			
 00003b bb57      	out		DDRB,	GENR2
                  
@@ -894,25 +894,25 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  .include "dmodes.asm"
                  
                  ;//*************************************************************************
-                 ;//Генерация АМ. Вместо АЦП используется значение, полученной с ПК в R18
-                 ;//В GENR1 - 0 если источник внешний, не 0 если внутренний
+                 ;//Р“РµРЅРµСЂР°С†РёСЏ РђРњ. Р’РјРµСЃС‚Рѕ РђР¦Рџ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Р·РЅР°С‡РµРЅРёРµ, РїРѕР»СѓС‡РµРЅРЅРѕР№ СЃ РџРљ РІ R18
+                 ;//Р’ GENR1 - 0 РµСЃР»Рё РёСЃС‚РѕС‡РЅРёРє РІРЅРµС€РЅРёР№, РЅРµ 0 РµСЃР»Рё РІРЅСѓС‚СЂРµРЅРЅРёР№
                  ;//*************************************************************************
                  dmode1:
-00003d d0d1      	rcall clearstack
+00003d d0d9      	rcall clearstack
                  
-                 	;Настраиваем регистр START
+                 	;РќР°СЃС‚СЂР°РёРІР°РµРј СЂРµРіРёСЃС‚СЂ START
 00003e 24ff      	clr		STATR
 00003f 7041      	andi	GENR1,		1
-000040 2af4      	or		STATR,		GENR1		;Режим инф. сигнала внешний/внутренний
+000040 2af4      	or		STATR,		GENR1		;Р РµР¶РёРј РёРЅС„. СЃРёРіРЅР°Р»Р° РІРЅРµС€РЅРёР№/РІРЅСѓС‚СЂРµРЅРЅРёР№
 000041 e041      	ldi		GENR1,		1
 000042 0f44      	lsl		GENR1
-000043 2af4      	or		STATR,		GENR1		;Номер режима
+000043 2af4      	or		STATR,		GENR1		;РќРѕРјРµСЂ СЂРµР¶РёРјР°
                  
 000044 e7e4      	ldi		ZL,	LOW(AM_GEN)
 000045 e0f0      	ldi		ZH,	HIGH(AM_GEN)
-000046 d0d8      	rcall   setTimer1COMPAVect
+000046 d0e0      	rcall   setTimer1COMPAVect
                  
-                 	;Настройка таймеров
+                 	;РќР°СЃС‚СЂРѕР№РєР° С‚Р°Р№РјРµСЂРѕРІ
 000047 e050      	ldi		GENR2,	0b0000000
 000048 bf53      	out		TCCR0,	GENR2
                  
@@ -929,7 +929,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 000050 bf59      	out		TIMSK,	GENR2
 000051 9478      	sei;
                  
-000052 fef0      	sbrs	STATR,		0		;Если первый бит START - 1, то  запускаем таймер для генерации внутр. сигнала
+000052 fef0      	sbrs	STATR,		0		;Р•СЃР»Рё РїРµСЂРІС‹Р№ Р±РёС‚ START - 1, С‚Рѕ  Р·Р°РїСѓСЃРєР°РµРј С‚Р°Р№РјРµСЂ РґР»СЏ РіРµРЅРµСЂР°С†РёРё РІРЅСѓС‚СЂ. СЃРёРіРЅР°Р»Р°
 000053 c007      	rjmp	dloop1
                  
 000054 e04b      	ldi		GENR1,		(1<<WGM21) | (1<<CS21) | (1<<CS20)
@@ -946,18 +946,18 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 00005b fcf0      	sbrc	STATR,		0
 00005c cffe      	rjmp	dloop1
                  	
-                 	;Если сигнал внешний, то считываем его значение с АЦП
+                 	;Р•СЃР»Рё СЃРёРіРЅР°Р» РІРЅРµС€РЅРёР№, С‚Рѕ СЃС‡РёС‚С‹РІР°РµРј РµРіРѕ Р·РЅР°С‡РµРЅРёРµ СЃ РђР¦Рџ
 00005d e645      	ldi		GENR1,		(1<<REFS0) | (1<<ADLAR) | (1<<MUX2) | (1<<MUX0)
-00005e d0ba      	rcall	getADCSample
+00005e d0c2      	rcall	getADCSample
 00005f b055      	in		MSIGR,		ADCH	
                  
 000060 cffa      rjmp dloop1
                  
                  
                  dmode2:
-000061 d0ad      	rcall	clearstack
+000061 d0b5      	rcall	clearstack
                  
-000062 e34f      	ldi		GENR1,	0b00111111			;Настройка PORTB
+000062 e34f      	ldi		GENR1,	0b00111111			;РќР°СЃС‚СЂРѕР№РєР° PORTB
 000063 bb47      	out		DDRB,	GENR1
                  
 000064 e051      	ldi		GENR2,	1<<WGM10
@@ -972,7 +972,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 00006a 9478      	sei
                  dloop2:
 00006b e645      	ldi		GENR1,		(1<<REFS0) | (1<<ADLAR) | (1<<MUX2) | (1<<MUX0)	
-00006c d0ac      	rcall	getADCSample
+00006c d0b4      	rcall	getADCSample
 00006d b055      	in		MSIGR,		ADCH
                  
 00006e cffc      rjmp dloop2
@@ -989,21 +989,21 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 000073 9409      ijmp
                  
                  ;*************************************************************************
-                 ;	Таймер 1 считывет значение из таблицы синусов
+                 ;	РўР°Р№РјРµСЂ 1 СЃС‡РёС‚С‹РІРµС‚ Р·РЅР°С‡РµРЅРёРµ РёР· С‚Р°Р±Р»РёС†С‹ СЃРёРЅСѓСЃРѕРІ
                  ;*************************************************************************
-                 AM_GEN:				;Обработка прерывания таймера
+                 AM_GEN:				;РћР±СЂР°Р±РѕС‚РєР° РїСЂРµСЂС‹РІР°РЅРёСЏ С‚Р°Р№РјРµСЂР°
 000074 bc3a      	out		OCR1AL,	T1NVR
 000075 73cf      	andi	YL,		ARRAY_SIZE-1				
 000076 9109      	ld		GENI1,	Y+				
                  
-000077 2d15      	mov		GENI2,	MSIGR												;Внешний сигнал считывается в цикле с АЦП или в другом прерывании если сигнал внутрений
+000077 2d15      	mov		GENI2,	MSIGR												;Р’РЅРµС€РЅРёР№ СЃРёРіРЅР°Р» СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ РІ С†РёРєР»Рµ СЃ РђР¦Рџ РёР»Рё РІ РґСЂСѓРіРѕРј РїСЂРµСЂС‹РІР°РЅРёРё РµСЃР»Рё СЃРёРіРЅР°Р» РІРЅСѓС‚СЂРµРЅРёР№
                  
-000078 0301      	mulsu   GENI1,	GENI2												;Перемножим значение инф. сигнала (беззнаковый) на значение несущей (знаковый)
+000078 0301      	mulsu   GENI1,	GENI2												;РџРµСЂРµРјРЅРѕР¶РёРј Р·РЅР°С‡РµРЅРёРµ РёРЅС„. СЃРёРіРЅР°Р»Р° (Р±РµР·Р·РЅР°РєРѕРІС‹Р№) РЅР° Р·РЅР°С‡РµРЅРёРµ РЅРµСЃСѓС‰РµР№ (Р·РЅР°РєРѕРІС‹Р№)
                  
 000079 2d11      	mov		GENI2,	R1
 00007a 2d06      	mov		GENI1,	CARAR
 00007b 0398      	fmulsu	GENI2,	GENI1
-00007c 2d01      	mov		GENI1,	R1													;Приведем к виду [0..255]
+00007c 2d01      	mov		GENI1,	R1													;РџСЂРёРІРµРґРµРј Рє РІРёРґСѓ [0..255]
 00007d c014      rjmp	int_tm1_exit
                  
                  
@@ -1019,7 +1019,7 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 000085 9109      	ld		GENI1,	Y+		
                  	;mov		GENI1,	CARAR
                  	;fmulsu	GENI2,	GENI1
-                 	;mov		GENI1,	R1													;Приведем к виду [0..255]
+                 	;mov		GENI1,	R1													;РџСЂРёРІРµРґРµРј Рє РІРёРґСѓ [0..255]
 000086 c00b      rjmp int_tm1_exit
                  
                  PM_GEN:
@@ -1039,14 +1039,14 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 000092 e810      	ldi		GENI2,	128
 000093 0f01      	add		GENI1,	GENI2
 000094 9506      	lsr		GENI1
-000095 9506      	lsr		GENI1														;Два раза поделим на 2, т.к. PB7 и PB6 не используются
+000095 9506      	lsr		GENI1														;Р”РІР° СЂР°Р·Р° РїРѕРґРµР»РёРј РЅР° 2, С‚.Рє. PB7 Рё PB6 РЅРµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ
 000096 bb08      	out		PORTB,	GENI1
 000097 bc2c      	out		TCNT1L,	NULL
 000098 9518      reti
                  
                  
                  ;*************************************************************************
-                 ;Исп. для дискретизатора
+                 ;РСЃРї. РґР»СЏ РґРёСЃРєСЂРµС‚РёР·Р°С‚РѕСЂР°
                  ;*************************************************************************
                  TIMER_1_COMP_B:
 000099 bc3a      	out		OCR1AL,	T1NVR
@@ -1057,14 +1057,14 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
 00009e 9518      reti
                  
                  ;*************************************************************************
-                 ;Исп. для дискретизатора
+                 ;РСЃРї. РґР»СЏ РґРёСЃРєСЂРµС‚РёР·Р°С‚РѕСЂР°
                  ;*************************************************************************
                  TIMER_1_OVF:
 00009f ba28      	out		PORTB,	NULL
 0000a0 9518      reti
                  
                  ;*************************************************************************
-                 ;	Таймер 2 Используется для генерации внутреннего инф. сигнала
+                 ;	РўР°Р№РјРµСЂ 2 РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РіРµРЅРµСЂР°С†РёРё РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РёРЅС„. СЃРёРіРЅР°Р»Р°
                  ;*************************************************************************
                  TIMER_2_COMP:
 0000a1 bc43      	out		OCR2,		T2NVR
@@ -1088,226 +1088,215 @@ C:\Users\Derron\Documents\Atmel Studio\6.2\amAsm2\amAsm2\amAsm2.asm(82): Includi
                  
                  
                  ; ;*************************************************************************
-                 ; ;	На RX что-то приходит
+                 ; ;	РќР° RX С‡С‚Рѕ-С‚Рѕ РїСЂРёС…РѕРґРёС‚
                  ; ;*************************************************************************
-                 ; ;//2 байт: [Команда; данные]
-                 ; ;//			0 :n	- ничего не делать
-                 ; ;//			11:x    - вернуть аналоговый режим
-                 ; ;//			22:x	- цифровое управление, режим x;
-                 ; ;//			44:n	- записать данные в R18
-                 ; ;//			55:n    - записать в OCR1A
-                 ; ;//			66:n	- записать в OCR1B
-                 ; USART_RX:
-                 ; USART_RECV1:			;//Считываем 1ый байт
-                 ; 	sbis UCSRA, RXC
-                 ; 	rjmp USART_recv1
-                 ; 	in GENI1,UDR
-                 ; USART_RECV2:			;//Считываем 2ой байт
-                 ; 	sbis UCSRA, RXC
-                 ; 	rjmp USART_recv2
-                 ; 	in GENI2,UDR
-                 ; USART_SEND1:
-                 ; 	sbis UCSRA,UDRE
-                 ; 	rjmp USART_SEND1
-                 ; 	out udr,GENI1
-                 ; USART_SEND2:
-                 ; 	sbis UCSRA,UDRE
-                 ; 	rjmp USART_SEND2
-                 ; 	out udr,GENI2
-                 ;
-                 ;
-                 
+                 ; ;//2 Р±Р°Р№С‚: [РљРѕРјР°РЅРґР°; РґР°РЅРЅС‹Рµ]
+                 ; ;//			0 :n	- РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ
+                 ; ;//			11:x    - РІРµСЂРЅСѓС‚СЊ Р°РЅР°Р»РѕРіРѕРІС‹Р№ СЂРµР¶РёРј
+                 ; ;//			22:x	- С†РёС„СЂРѕРІРѕРµ СѓРїСЂР°РІР»РµРЅРёРµ, СЂРµР¶РёРј x;
+                 ; ;//			30:x	- Р·Р°РїРёСЃР°С‚СЊ Р°РјРїР»РёС‚СѓРґСѓ РЅРµСЃСѓС‰РµР№ (CARAR) 
+                 ; ;//			31:n    - Р·Р°РїРёСЃР°С‚СЊ С‡Р°СЃС‚РѕС‚Сѓ РЅРµСЃСѓС‰РµР№ (T1NVR (OCR1A))
+                 ; ;//			32:n	- Р·Р°РїРёСЃР°С‚СЊ С‡Р°СЃС‚РѕС‚Сѓ РёРЅС„.СЃРёРіРЅР°Р»Р° (T2NVR (OCR2))
                  
                  USART_RX:
-                 USART_RECV1:			;//Считываем 1ый байт
+                 USART_RECV1:							;//РЎС‡РёС‚С‹РІР°РµРј 1С‹Р№ Р±Р°Р№С‚
 0000af 9b5f      	sbis	UCSRA,		RXC
 0000b0 cffe      	rjmp	USART_recv1
 0000b1 b10c      	in		GENI1,		UDR
                  
-                 USART_SEND1:							;Отправляем обратно
-0000b2 9b5d      	sbis	UCSRA,		UDRE
-0000b3 cffe      	rjmp	USART_SEND1
-0000b4 b90c      	out		udr,		GENI1
-                 
-0000b5 3030      	cpi		BUFPR,		0				;Если первый байт в пакете
-0000b6 f439      	BRNE	SKTP
-0000b7 3906      	cpi		GENI1,		BUFHEADER		;То он должен быть равен заголовку
-0000b8 f009      	BREQ	buffst
-0000b9 c03b      	rjmp	UR1_EXIT
-                 buffst:
-                 
-0000ba 9300 0060 	sts		uartBuf,	GENI1
-0000bc 9533      	inc		BUFPR
-0000bd 9518      	reti
+0000b2 3030      	cpi		BUFPR,		0				;Р•СЃР»Рё РїРµСЂРІС‹Р№ Р±Р°Р№С‚ РІ РїР°РєРµС‚Рµ
+0000b3 f441      	BRNE	SKTP
+0000b4 3906      	cpi		GENI1,		BUFHEADER		;РўРѕ РѕРЅ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СЂР°РІРµРЅ Р·Р°РіРѕР»РѕРІРєСѓ
+0000b5 f009      	BREQ	buffst
+0000b6 c041      	rjmp	NOT_HEADER
+                 buffst:									;Р—Р°РїРёСЃСЊ РІ Р±СѓС„РµСЂ Р·Р°РіРѕР»РѕРІРєР°
+0000b7 9300 0060 	sts		uartBuf,	GENI1
+0000b9 9533      	inc		BUFPR
+0000ba e001      	ldi		GENI1,		1				;РљРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ РґР»СЏ РІС‹С…РѕРґР°
+0000bb c03e      	rjmp	UR1_EXIT
                  
                  SKTP:
-0000be 93af      	push	Xl
-0000bf 93bf      	push	Xh
-0000c0 e6a0      	ldi		Xl,		low(uartBuf)
-0000c1 e0b0      	ldi		XH,		high(uartBuf)
-0000c2 0fa3      	add		XL,		BUFPR				;Записываем на нужную позицию в буфере
-0000c3 930c      	st		X,		GENI1
-0000c4 91bf      	pop		Xh
-0000c5 91af      	pop		XL
-0000c6 9533      	inc     BUFPR
+0000bc 93af      	push	Xl
+0000bd 93bf      	push	Xh
+0000be e6a0      	ldi		Xl,		low(uartBuf)
+0000bf e0b0      	ldi		XH,		high(uartBuf)
+0000c0 0fa3      	add		XL,		BUFPR				;Р—Р°РїРёСЃС‹РІР°РµРј РЅР° РЅСѓР¶РЅСѓСЋ РїРѕР·РёС†РёСЋ РІ Р±СѓС„РµСЂРµ
+0000c1 930c      	st		X,		GENI1
+0000c2 91bf      	pop		Xh
+0000c3 91af      	pop		XL
+0000c4 9533      	inc     BUFPR
                  
-0000c7 3034      	cpi		BUFPR,	4					;Когда буфер заполнен, обрабатываем
-0000c8 f561      	brne	UR1_EXIT
+0000c5 3034      	cpi		BUFPR,	4					;РљРѕРіРґР° Р±СѓС„РµСЂ Р·Р°РїРѕР»РЅРµРЅ, РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј
+0000c6 f599      	brne	UR1_EXIT			
                  
-0000c9 e030      	ldi		BUFPR,	0
+0000c7 e030      	ldi		BUFPR,	0
                  
-0000ca 9100 0061 	lds		GENI1,	uartBuf+1			;т.е ксорим первые три байта, результат должен равняться четвертому
-0000cc 9110 0062 	lds		GENI2,	uartBuf+2
-0000ce e926      	ldi		GENI3,	BUFHEADER
+0000c8 9100 0061 	lds		GENI1,	uartBuf+1			;С‚.Рµ РєСЃРѕСЂРёРј РїРµСЂРІС‹Рµ С‚СЂРё Р±Р°Р№С‚Р°, СЂРµР·СѓР»СЊС‚Р°С‚ РґРѕР»Р¶РµРЅ СЂР°РІРЅСЏС‚СЊСЃСЏ С‡РµС‚РІРµСЂС‚РѕРјСѓ
+0000ca 9110 0062 	lds		GENI2,	uartBuf+2
+0000cc e926      	ldi		GENI3,	BUFHEADER
                  
-0000cf 930f      	push	GENI1
-0000d0 2702      	eor		GENI1,	GENI3
-0000d1 2701      	eor		GENI1,	GENI2
+0000cd 930f      	push	GENI1
+0000ce 2702      	eor		GENI1,	GENI3
+0000cf 2701      	eor		GENI1,	GENI2
                  
-0000d2 9120 0063 	lds		GENI3,	uartBuf+3
+0000d0 9120 0063 	lds		GENI3,	uartBuf+3
                  
-0000d4 1702      	cp		GENI1,	GENI3		;Проверяем контрольную сумму
-0000d5 910f      	pop		GENI1
-0000d6 f4f1      	BRNE	UR1_EXIT			;Если не совпала, выходим
+0000d2 1702      	cp		GENI1,	GENI3		;РџСЂРѕРІРµСЂСЏРµРј РєРѕРЅС‚СЂРѕР»СЊРЅСѓСЋ СЃСѓРјРјСѓ
+0000d3 910f      	pop		GENI1
+0000d4 f509      	BRNE	INCORRECT_CHECKSUM			;Р•СЃР»Рё РЅРµ СЃРѕРІРїР°Р»Р°, РІС‹С…РѕРґРёРј
                  
-0000d7 300b      	cpi		GENI1,	11
-0000d8 f099      	BREQ	setAmode
+0000d5 300b      	cpi		GENI1,	11
+0000d6 f0c1      	BREQ	setAmode
                  
-0000d9 3106      	cpi		GENI1,	22
-0000da f039      	BREQ	setdMOde
+0000d7 3106      	cpi		GENI1,	22
+0000d8 f049      	BREQ	setdMOde
                  
-0000db 320c      	cpi		GENI1,	44
-0000dc f091      	BREQ	writeReg
+0000d9 310e      	cpi		GENI1,	30
+0000da f029      	BREQ	writeCARAR
                  
-0000dd 3307      	cpi		GENI1,	55
-0000de f091      	BREQ	writeFreq
+0000db 310f      	cpi		GENI1,	31
+0000dc f0a9      	BREQ	writeT1NVR
                  
-0000df 3402      	cpi		GENI1,	66
-0000e0 f091      	BREQ	writePLen
+0000dd 3200      	cpi		GENI1,	32
+0000de f0a9      	BREQ	writeT2NVR
                  
-0000e1 c013      	rjmp INT_PREP_EX
+0000df c01a      	rjmp INT_PREP_EX
+                 
+                 writeCARAR:
+0000e0 2e61      	mov		CARAR,	GENI2
+0000e1 c018      	rjmp	INT_PREP_EX
                  
                  setdMode:
-                 	;//Очищаем стек
-0000e2 e000      	ldi GENI1,	0
-0000e3 bf0b      	out GICR,	GENI1
+                 	;//РћС‡РёС‰Р°РµРј СЃС‚РµРє
+0000e2 d01b      	rcall STOP_ALL
+                 	
+0000e3 e000      	ldi GENI1,	0
+0000e4 bf0b      	out GICR,	GENI1
+                 	
+0000e5 e840      	ldi		GENR1,	0b10000000		;Р’ GENR1 СЃРѕРґРµСЂР¶РёС‚СЃСЏ РёРЅС„. Рѕ РёСЃС‚РѕС‡РЅРёРєРµ РёРЅС„. СЃРёРіРЅР°Р»Р°
+0000e6 2341      	and		GENR1,	GENI2			;РџРµСЂРµРґР°РµРј РµРµ СЃ РџРљ РІ СЃС‚Р°СЂС€РµРј Р±РёС‚Рµ РєРѕРјР°РЅРґС‹
+0000e7 771f      	andi	GENI2,	0b01111111	
                  
-0000e4 d011      	rcall STOP_ALL
-                 
-0000e5 3011      	cpi GENI2,	1
-0000e6 f409      	BRNE dmd1
-0000e7 cf55      	rjmp dmode1
+0000e8 3011      	cpi GENI2,	1
+0000e9 f409      	BRNE dmd1
+0000ea cf52      	rjmp dmode1
                  dmd1:
-0000e8 3012      	cpi GENI2,2
-0000e9 f409      	BRNE dmd2
-0000ea cf76      	rjmp dmode2
+0000eb 3012      	cpi GENI2,2
+0000ec f409      	BRNE dmd2
+0000ed cf73      	rjmp dmode2
                  dmd2:
-0000eb cf75      rjmp dmode2
+0000ee cf72      rjmp dmode2
                  
                  setAmode:
-0000ec d009      	rcall STOP_ALL
-0000ed e400      	ldi GENI1,	(1<<INT0)
-0000ee bf0b      	out GICR,	GENI1	
+0000ef d00e      	rcall STOP_ALL
+0000f0 e400      	ldi GENI1,	(1<<INT0)
+0000f1 bf0b      	out GICR,	GENI1	
                  	;rjmp amode1	
                  
-                 writeReg:
-0000ef 2e61      	mov		CARAR,	GENI2
-0000f0 c004      	rjmp	INT_PREP_EX
+                 writeT1NVR:
+0000f2 2e31      	mov		T1NVR,	GENI2
+0000f3 c006      	rjmp	INT_PREP_EX
                  
-                 WriteFreq:
-0000f1 2e31      	mov		T1NVR,	GENI2
-0000f2 c002      	rjmp	INT_PREP_EX
+                 writeT2NVR:
+0000f4 2e41      	mov		T2NVR,	GENI2
+0000f5 c004      	rjmp	INT_PREP_EX
                  
-                 WritePLen:
-0000f3 bd18      	out		OCR1BL,	GENI2
-0000f4 c000      	rjmp	INT_PREP_EX
-                 
+                 INCORRECT_CHECKSUM:					;РћС€РёР±РєР° - РєРѕРЅС‚СЂРѕР»СЊРЅР°СЏ СЃСѓРјРјР° РЅРµ СЃРѕРІРїР°Р»Р°
+0000f6 e003      	ldi		GENI1,		3
+0000f7 c002      	rjmp	UR1_EXIT
+                 NOT_HEADER:							;РћС€РёР±РєР° - РїРµСЂРµРґР°РЅРЅС‹Р№ Р±Р°Р№С‚ РЅРµ Р·Р°РіРѕР»РѕРІРѕРє
+0000f8 e000      	ldi		GENI1,		0
+0000f9 c000      	rjmp	UR1_EXIT
                  INT_PREP_EX:
                  UR1_EXIT:
-0000f5 9518      reti
+0000fa 9b5d      	sbis	UCSRA,		UDRE
+0000fb cffc      	rjmp	NOT_HEADER
+0000fc b90c      	out		udr,		GENI1
+0000fd 9518      reti
                  
                  
                  
-                 ;Выключает все таймеры, и АЦП
+                 ;Р’С‹РєР»СЋС‡Р°РµС‚ РІСЃРµ С‚Р°Р№РјРµСЂС‹, Рё РђР¦Рџ
                  ;***********************************
                  STOP_ALL:
-0000f6 e040      	ldi GENR1,0
-0000f7 bf43      	out TCCR0,GENR1
-0000f8 bd4f      	out TCCR1A,GENR1
-0000f9 bd4e      	out TCCR1B,GENR1
-0000fa bd45      	out TCCR2, GENR1
-0000fb b947      	out ADMUX,GENR1
-0000fc b946      	out ADCSRA,GENR1
-0000fd bf49      	out TIMSK,GENR1
-0000fe 9508      ret
+0000fe e040      	ldi GENR1,0
+0000ff bf43      	out TCCR0,GENR1
+000100 bd4f      	out TCCR1A,GENR1
+000101 bd4e      	out TCCR1B,GENR1
+000102 bd45      	out TCCR2, GENR1
+000103 b947      	out ADMUX,GENR1
+000104 b946      	out ADCSRA,GENR1
+000105 bf49      	out TIMSK,GENR1
+000106 9508      ret
                  ;***********************************
                  
-                 ;Загрузка массива синусоиды в ОЗУ
+                 ;Р—Р°РіСЂСѓР·РєР° РјР°СЃСЃРёРІР° СЃРёРЅСѓСЃРѕРёРґС‹ РІ РћР—РЈ
                  ;***********************************
                  LOAD_ARRAY:
-0000ff e040      	ldi		GENR1,	0
-000100 e0c0      	ldi		YL,		LOW(asin)
-000101 e0d1      	ldi		YH,		HIGH(asin)
-000102 e1e8      	ldi		ZL,		LOW(SINAR*2)	;Считываем адрес массива значений синусоиды
-000103 e0f0      	ldi		ZH,		HIGH(SINAR*2)
-000104 e440      	ldi		GENR1,	ARRAY_SIZE
+000107 e040      	ldi		GENR1,	0
+000108 e0c0      	ldi		YL,		LOW(asin)
+000109 e0d1      	ldi		YH,		HIGH(asin)
+00010a e1e8      	ldi		ZL,		LOW(SINAR*2)	;РЎС‡РёС‚С‹РІР°РµРј Р°РґСЂРµСЃ РјР°СЃСЃРёРІР° Р·РЅР°С‡РµРЅРёР№ СЃРёРЅСѓСЃРѕРёРґС‹
+00010b e0f0      	ldi		ZH,		HIGH(SINAR*2)
+00010c e440      	ldi		GENR1,	ARRAY_SIZE
                  laloop:
-000105 9155      	lpm		GENR2,	Z+
-000106 9359      	st		Y+,		GENR2
-000107 954a      	dec		GENR1
-000108 1142      	cpse	GENR1,	NULL
-000109 cffb      	rjmp	laloop
+00010d 9155      	lpm		GENR2,	Z+
+00010e 9359      	st		Y+,		GENR2
+00010f 954a      	dec		GENR1
+000110 1142      	cpse	GENR1,	NULL
+000111 cffb      	rjmp	laloop
                  laex:
-00010a e0d1      	ldi		YH,		1
-00010b e0c0      	ldi		Yl,		0
-00010c e0b1      	ldi		XH,		1
-00010d e0a0      	ldi		Xl,		0
-00010e 9508      ret
+000112 e0d1      	ldi		YH,		1
+000113 e0c0      	ldi		Yl,		0
+000114 e0b1      	ldi		XH,		1
+000115 e0a0      	ldi		Xl,		0
+000116 9508      ret
                  ;***********************************
                  
-                 ;Чистит стэк
+                 ;Р§РёСЃС‚РёС‚ СЃС‚СЌРє
                  ;***********************************
-                 clearStack:		;Чистит стек, адрес возврата сует в R0, а затем пихает его в стек(для того чтобы сработал ret)
-00010f 94f8      	cli
-000110 900f      	pop		R0
-000111 901f      	pop		R1
-000112 e50f      	ldi		R16,	low(RAMEND)		;Загрузка в регистр r16 адреса верхней границы ОЗУ
-000113 bf0d      	out		SPL,	R16				;Копирование значения из r16 в регистр указателя стека SPL
-000114 e004      	ldi		R16,	high(RAMEND)
-000115 bf0e      	out		SPH,	R16
-000116 921f      	push	R1
-000117 920f      	push	R0
-000118 9508      ret
+                 clearStack:		;Р§РёСЃС‚РёС‚ СЃС‚РµРє, Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° СЃСѓРµС‚ РІ R0, Р° Р·Р°С‚РµРј РїРёС…Р°РµС‚ РµРіРѕ РІ СЃС‚РµРє(РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ СЃСЂР°Р±РѕС‚Р°Р» ret)
+000117 94f8      	cli
+000118 900f      	pop		R0
+000119 901f      	pop		R1
+00011a e50f      	ldi		R16,	low(RAMEND)		;Р—Р°РіСЂСѓР·РєР° РІ СЂРµРіРёСЃС‚СЂ r16 Р°РґСЂРµСЃР° РІРµСЂС…РЅРµР№ РіСЂР°РЅРёС†С‹ РћР—РЈ
+00011b bf0d      	out		SPL,	R16				;РљРѕРїРёСЂРѕРІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РёР· r16 РІ СЂРµРіРёСЃС‚СЂ СѓРєР°Р·Р°С‚РµР»СЏ СЃС‚РµРєР° SPL
+00011c e004      	ldi		R16,	high(RAMEND)
+00011d bf0e      	out		SPH,	R16
+00011e 921f      	push	R1
+00011f 920f      	push	R0
+000120 9508      ret
                  ;***********************************
                  
-                 ;Получает значение с АЦП, значение ADMUX должно быть в GENR1, результат будет в ADCH
+                 ;РџРѕР»СѓС‡Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ СЃ РђР¦Рџ, Р·РЅР°С‡РµРЅРёРµ ADMUX РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РІ GENR1, СЂРµР·СѓР»СЊС‚Р°С‚ Р±СѓРґРµС‚ РІ ADCH
                  ;***********************************
                  getADCSample:
-000119 b947      	out		ADMUX,		GENR1															;Регистр управления мультиплексора на АЦП
-00011a ec44      	ldi		GENR1,		(1<<ADEN) | (1<<ADSC)  |(1<<ADPS2)
-00011b b946      	out		ADCSRA,		GENR1															;Регистр управления АЦП;
+000121 b947      	out		ADMUX,		GENR1															;Р РµРіРёСЃС‚СЂ СѓРїСЂР°РІР»РµРЅРёСЏ РјСѓР»СЊС‚РёРїР»РµРєСЃРѕСЂР° РЅР° РђР¦Рџ
+000122 ec44      	ldi		GENR1,		(1<<ADEN) | (1<<ADSC)  |(1<<ADPS2)
+000123 b946      	out		ADCSRA,		GENR1															;Р РµРіРёСЃС‚СЂ СѓРїСЂР°РІР»РµРЅРёСЏ РђР¦Рџ;
                  gas1:
-00011c 9936      	sbic	ADCSRA,		ADSC
-00011d cffe      	rjmp	gas1
-00011e 9508      ret
+000124 9936      	sbic	ADCSRA,		ADSC
+000125 cffe      	rjmp	gas1
+000126 9508      ret
                  ;***********************************
                  
-                 ;Меняет адрес прерывания TIMER_1_COMP_A, новый адрес берется из регистра Z
+                 ;РњРµРЅСЏРµС‚ Р°РґСЂРµСЃ РїСЂРµСЂС‹РІР°РЅРёСЏ TIMER_1_COMP_A, РЅРѕРІС‹Р№ Р°РґСЂРµСЃ Р±РµСЂРµС‚СЃСЏ РёР· СЂРµРіРёСЃС‚СЂР° Z
                  ;***********************************
                  setTimer1COMPAVect:
-00011f 93e0 0064 	sts		TIMER_1_COMP_A_vect,	ZL
-000121 93f0 0065 	sts		TIMER_1_COMP_A_vect+1,	ZH
-000123 9508      ret
+000127 93e0 0064 	sts		TIMER_1_COMP_A_vect,	ZL
+000129 93f0 0065 	sts		TIMER_1_COMP_A_vect+1,	ZH
+00012b 9508      ret
                  ;***********************************
                  
                  .dseg
-000060           uartBuf:				.byte 4				;Буфер: заголовок, номер команды, параметр, контрольная сумма
-000064           TIMER_1_COMP_A_vect:	.byte 2				;Указатель на начало прерывания
-000066           MODE_START_VECT:		.byte 2				;Указатель на начало режима
+000060           uartBuf:				.byte 4				;Р‘СѓС„РµСЂ: Р·Р°РіРѕР»РѕРІРѕРє, РЅРѕРјРµСЂ РєРѕРјР°РЅРґС‹, РїР°СЂР°РјРµС‚СЂ, РєРѕРЅС‚СЂРѕР»СЊРЅР°СЏ СЃСѓРјРјР°
+000064           TIMER_1_COMP_A_vect:	.byte 2				;РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РЅР°С‡Р°Р»Рѕ РїСЂРµСЂС‹РІР°РЅРёСЏ
+000066           MODE_START_VECT:		.byte 2				;РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РЅР°С‡Р°Р»Рѕ СЂРµР¶РёРјР°
 000068           PM_POINTER:				.byte 1	
                  
                  
-                 .org  0x100		;После такого, ZH обязательно в 1  !!!!!!!!!!!!!!!
+                 .org  0x100		;РџРѕСЃР»Рµ С‚Р°РєРѕРіРѕ, ZH РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РІ 1  !!!!!!!!!!!
+000100           aSIN: .byte ARRAY_SIZE
 
 
 RESOURCE USE INFORMATION
@@ -1325,16 +1314,16 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega8" register use summary:
-r0 :   2 r1 :   6 r2 :   4 r3 :   5 r4 :   1 r5 :   7 r6 :   2 r7 :   1 
+r0 :   2 r1 :   6 r2 :   4 r3 :   5 r4 :   2 r5 :   7 r6 :   2 r7 :   1 
 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   5 
-r16:  47 r17:  24 r18:   4 r19:   7 r20:  41 r21:  22 r22:   0 r23:   0 
+r16:  50 r17:  26 r18:   4 r19:   7 r20:  43 r21:  22 r22:   0 r23:   0 
 r24:   0 r25:   0 r26:   6 r27:   4 r28:   8 r29:   2 r30:   4 r31:   4 
 x  :   2 y  :   4 z  :   1 
 Registers used: 24 out of 35 (68.6%)
 
 "ATmega8" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   5 adiw  :   0 and   :   0 
-andi  :   6 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   5 adiw  :   0 and   :   1 
+andi  :   7 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 breq  :   6 brge  :   0 brhc  :   0 brhs  :   0 
 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 brne  :   5 
 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 brvs  :   0 
@@ -1342,22 +1331,22 @@ bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 clh   :   0
 cli   :   1 cln   :   0 clr   :   2 cls   :   0 clt   :   0 clv   :   0 
 clz   :   0 com   :   0 cp    :   1 cpc   :   0 cpi   :  10 cpse  :   1 
 dec   :   1 eor   :   2 fmul  :   2 fmuls :   0 fmulsu:   1 icall :   0 
-ijmp  :   1 in    :   4 inc   :   3 ld    :   4 ldd   :   0 ldi   :  46 
-lds   :   6 lpm   :   1 lsl   :   1 lsr   :   4 mov   :  12 movw  :   0 
+ijmp  :   1 in    :   4 inc   :   3 ld    :   4 ldd   :   0 ldi   :  50 
+lds   :   6 lpm   :   1 lsl   :   1 lsr   :   4 mov   :  13 movw  :   0 
 mul   :   0 muls  :   0 mulsu :   1 neg   :   0 nop   :   0 or    :   2 
-ori   :   1 out   :  44 pop   :   5 push  :   5 rcall :   8 ret   :   6 
-reti  :   6 rjmp  :  26 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
+ori   :   1 out   :  43 pop   :   5 push  :   5 rcall :   8 ret   :   6 
+reti  :   5 rjmp  :  29 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
 sbi   :   0 sbic  :   1 sbis  :   3 sbiw  :   0 sbr   :   0 sbrc  :   1 
 sbrs  :   1 sec   :   0 seh   :   0 sei   :   2 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
 st    :   2 std   :   0 sts   :   4 sub   :   0 subi  :   1 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 41 out of 110 (37.3%)
+Instructions used: 42 out of 110 (38.2%)
 
 "ATmega8" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000248    508     64    572    8192   7.0%
+[.cseg] 0x000000 0x000258    524     64    588    8192   7.2%
 [.dseg] 0x000060 0x000140      0     73     73    1024   7.1%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

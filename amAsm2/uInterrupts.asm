@@ -112,48 +112,23 @@ ret
 ; ;//			30:x	- записать амплитуду несущей (CARAR) 
 ; ;//			31:n    - записать частоту несущей (T1NVR (OCR1A))
 ; ;//			32:n	- записать частоту инф.сигнала (T2NVR (OCR2))
-; USART_RX:
-; USART_RECV1:			;//Считываем 1ый байт
-; 	sbis UCSRA, RXC
-; 	rjmp USART_recv1
-; 	in GENI1,UDR
-; USART_RECV2:			;//Считываем 2ой байт
-; 	sbis UCSRA, RXC
-; 	rjmp USART_recv2
-; 	in GENI2,UDR
-; USART_SEND1:
-; 	sbis UCSRA,UDRE
-; 	rjmp USART_SEND1
-; 	out udr,GENI1
-; USART_SEND2:
-; 	sbis UCSRA,UDRE
-; 	rjmp USART_SEND2
-; 	out udr,GENI2
-;
-;
-
 
 USART_RX:
-USART_RECV1:			;//Считываем 1ый байт
+USART_RECV1:							;//Считываем 1ый байт
 	sbis	UCSRA,		RXC
 	rjmp	USART_recv1
 	in		GENI1,		UDR
-
-USART_SEND1:							;Отправляем обратно
-	sbis	UCSRA,		UDRE
-	rjmp	USART_SEND1
-	out		udr,		GENI1
 
 	cpi		BUFPR,		0				;Если первый байт в пакете
 	BRNE	SKTP
 	cpi		GENI1,		BUFHEADER		;То он должен быть равен заголовку
 	BREQ	buffst
-	rjmp	UR1_EXIT
-buffst:
-
+	rjmp	NOT_HEADER
+buffst:									;Запись в буфер заголовка
 	sts		uartBuf,	GENI1
 	inc		BUFPR
-	reti
+	ldi		GENI1,		1				;Код состояния для выхода
+	rjmp	UR1_EXIT
 
 SKTP:
 	push	Xl
@@ -167,7 +142,7 @@ SKTP:
 	inc     BUFPR
 
 	cpi		BUFPR,	4					;Когда буфер заполнен, обрабатываем
-	brne	UR1_EXIT
+	brne	UR1_EXIT			
 
 	ldi		BUFPR,	0
 
@@ -183,7 +158,7 @@ SKTP:
 
 	cp		GENI1,	GENI3		;Проверяем контрольную сумму
 	pop		GENI1
-	BRNE	UR1_EXIT			;Если не совпала, выходим
+	BRNE	INCORRECT_CHECKSUM			;Если не совпала, выходим
 
 	cpi		GENI1,	11
 	BREQ	setAmode
@@ -241,8 +216,17 @@ writeT2NVR:
 	mov		T2NVR,	GENI2
 	rjmp	INT_PREP_EX
 
+INCORRECT_CHECKSUM:					;Ошибка - контрольная сумма не совпала
+	ldi		GENI1,		3
+	rjmp	UR1_EXIT
+NOT_HEADER:							;Ошибка - переданный байт не заголовок
+	ldi		GENI1,		0
+	rjmp	UR1_EXIT
 INT_PREP_EX:
 UR1_EXIT:
+	sbis	UCSRA,		UDRE
+	rjmp	NOT_HEADER
+	out		udr,		GENI1
 reti
 
 
