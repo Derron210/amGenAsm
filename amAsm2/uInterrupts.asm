@@ -182,8 +182,7 @@ writeCARAR:
 	rjmp	INT_PREP_EX
 
 setdMode:
-	;//Очищаем стек
-	rcall STOP_ALL
+	rcall STOP_ALL					;//Очищаем стек
 	
 	ldi GENI1,	0
 	out GICR,	GENI1
