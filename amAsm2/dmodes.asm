@@ -187,3 +187,42 @@ dloop3:
 	in		MSIGR,		ADCH	
 
 rjmp dloop3
+
+
+;//*************************************************************************
+;//Синусоида умноженная на знач. SIGAR
+;//Только для управления с ПК
+;//*************************************************************************
+dmode4:
+	rcall clearstack
+
+	;Настраиваем регистр START
+	clr		STATR
+	ldi		GENR1,		4
+	lsl		GENR1
+	or		STATR,		GENR1		;Номер режима
+
+	ldi		ZL,	LOW(AM_GEN)
+	ldi		ZH,	HIGH(AM_GEN)
+	rcall   setTimer1COMPAVect
+
+	;Настройка таймеров
+	ldi		GENR2,	0b0000000
+	out		TCCR0,	GENR2
+
+	ldi		GENR2,	200
+	out		OCR1AL,	GENR2
+
+	ldi		GENR2,	(0<<COM1A1) | (0<<COM1A0) | (0<<COM1B1) | (0<<COM1B0) | (0<<FOC1A) | (0<<FOC1B) | (0<<WGM11) | (0<<WGM10)
+	out		TCCR1A,	GENR2
+
+	ldi		GENR2,	(0<<ICNC1) | (0<<ICES1) | (0<<WGM13) | (1<<WGM12) | (0<<CS12) | (0<<CS11) | (1<<CS10) 
+	out		TCCR1B,	GENR2
+
+	ldi		GENR2, (1<<OCIE1A)
+	out		TIMSK,	GENR2
+	sei;
+dloop4:
+	mov		GENR1,	SIGAR
+	mov		MSIGR,	GENR1
+rjmp dloop4

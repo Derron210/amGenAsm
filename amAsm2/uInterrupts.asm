@@ -118,7 +118,7 @@ UEXIT:
 ; ;//			30:x	- записать амплитуду несущей (CARAR) 
 ; ;//			31:n    - записать частоту несущей (T1NVR (OCR1A))
 ; ;//			32:n	- записать частоту инф.сигнала (T2NVR (OCR2))
-; ;//			33:n	- записать амплитуду внутреннего инф. сигнала (MSIGR)
+; ;//			33:n	- записать амплитуду внутреннего инф. сигнала (SIGAR)
 
 USART_RX:
 USART_RECV1:							;//Считываем 1ый байт
@@ -148,8 +148,9 @@ SKTP:
 	pop		XL
 	inc     BUFPR
 
-	cpi		BUFPR,	4					;Когда буфер заполнен, обрабатываем
-	brne	UR1_EXIT			
+	ldi		GENI3,	4
+	cpse	BUFPR,	GENI3				;Когда буфер заполнен, обрабатываем
+	rjmp	UR1_EXIT		
 
 	ldi		BUFPR,	0
 
@@ -180,7 +181,7 @@ SKTP:
 	BREQ	writeT2NVR
 
 	cpi		GENI1,	33
-	breq	writeMSIGR
+	breq	writeSIGAR
 
 	ldi		GENI1,	2					;Неизвестная команда
 	rjmp INT_PREP_EX
@@ -211,10 +212,14 @@ dmd1:
 	brne	dmd2
 	rjmp	dmode2
 dmd2:
-	cpi		GENI2	,3
-	brne dmd3
-	rjmp dmode3
+	cpi		GENI2,	3
+	brne	dmd3
+	rjmp	dmode3
 dmd3:
+	cpi		GENI2,	4
+	brne	dmd4
+	rjmp	dmode4
+dmd4:
 rjmp dmode1
 
 writeT1NVR:
@@ -226,8 +231,8 @@ writeT2NVR:
 	mov		GENI1,	GENI2
 	rjmp	INT_PREP_EX
 
-writeMSIGR:
-	mov		MSIGR,	GENI2
+writeSIGAR:
+	mov		SIGAR,	GENI2
 	mov		GENI1,	GENI2
 	rjmp	UR1_EXIT
 
