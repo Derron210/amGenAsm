@@ -37,11 +37,14 @@ dmode1:
 
 	sbrs	STATR,		0		;Если первый бит START - 1, то  запускаем таймер для генерации внутр. сигнала
 	rjmp	dloop1
-
+	
+	ldi		GENR1,		100
+	mov		SIGAR,		GENR1
+	
 	ldi		GENR1,		(1<<WGM21) | (1<<CS21) | (1<<CS20)
 	out		TCCR2,		GENR1
 
-	ldi		GENR1,		50
+	ldi		GENR1,		100
 	out		OCR2,		GENR1
 	in		GENR1,		TIMSK
 	ori		GENR1,		(1<<OCIE2)

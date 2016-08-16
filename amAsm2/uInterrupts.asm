@@ -102,6 +102,13 @@ _debug_uart:
 ret
 
 
+.macro UART_SEND
+UEXIT:
+	sbis	UCSRA,		UDRE
+	rjmp	UEXIT
+	out		udr,		@0
+.endm
+
 ; ;*************************************************************************
 ; ;	На RX что-то приходит
 ; ;*************************************************************************
@@ -193,7 +200,9 @@ setdMode:
 	andi	GENI2,	0b01111111	
 	sbrc	GENR1,	7
 	ldi		GENR1,	1
-
+	
+	UART_SEND GENI1
+	
 	cpi GENI2,	1
 	BRNE dmd1
 	rjmp dmode1
@@ -227,9 +236,7 @@ NOT_HEADER:							;Ошибка - переданный байт не загол�
 	rjmp	UR1_EXIT
 INT_PREP_EX:
 UR1_EXIT:
-	sbis	UCSRA,		UDRE
-	rjmp	NOT_HEADER
-	out		udr,		GENI1
+	UART_SEND GENI1
 reti
 
 
