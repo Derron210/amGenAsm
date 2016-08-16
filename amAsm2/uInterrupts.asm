@@ -203,15 +203,19 @@ setdMode:
 	
 	UART_SEND		GENI1
 	
-	cpi GENI2,	1
-	BRNE dmd1
-	rjmp dmode1
+	cpi		GENI2,	1
+	BRNE	dmd1
+	rjmp	dmode1
 dmd1:
-	cpi GENI2,2
-	BRNE dmd2
-	rjmp dmode2
+	cpi		GENI2,	2
+	brne	dmd2
+	rjmp	dmode2
 dmd2:
-rjmp dmode2
+	cpi		GENI2	,3
+	brne dmd3
+	rjmp dmode3
+dmd3:
+rjmp dmode1
 
 writeT1NVR:
 	mov		T1NVR,	GENI2
