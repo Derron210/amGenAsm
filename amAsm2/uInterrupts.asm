@@ -191,6 +191,8 @@ setdMode:
 	ldi		GENR1,	0b10000000		;В GENR1 содержится инф. о источнике инф. сигнала
 	and		GENR1,	GENI2			;Передаем ее с ПК в старшем бите команды
 	andi	GENI2,	0b01111111	
+	sbrc	GENR1,	7
+	ldi		GENR1,	1
 
 	cpi GENI2,	1
 	BRNE dmd1

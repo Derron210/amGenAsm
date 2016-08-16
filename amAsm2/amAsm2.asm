@@ -75,7 +75,8 @@ START:
 	ldi		GENR2,	0b00111111			
 	out		DDRB,	GENR2
 
-	rjmp	dmode1
+	clr		GENR1
+	rjmp	setDmode
 
 .include "dmodes.asm"
 
