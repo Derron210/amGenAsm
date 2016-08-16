@@ -156,7 +156,7 @@ SKTP:
 
 	lds		GENI3,	uartBuf+3
 
-	cp		GENI1,	GENI3		;Проверяем контрольную сумму
+	cp		GENI1,	GENI3				;Проверяем контрольную сумму
 	pop		GENI1
 	BRNE	INCORRECT_CHECKSUM			;Если не совпала, выходим
 
@@ -175,6 +175,7 @@ SKTP:
 	cpi		GENI1,	32
 	BREQ	writeT2NVR
 
+	ldi		GENI1,	2					;Неизвестная команда
 	rjmp INT_PREP_EX
 
 writeCARAR:
@@ -213,6 +214,7 @@ writeT1NVR:
 
 writeT2NVR:
 	mov		T2NVR,	GENI2
+	mov		GENI1,	GENI2
 	rjmp	INT_PREP_EX
 
 INCORRECT_CHECKSUM:					;Ошибка - контрольная сумма не совпала
