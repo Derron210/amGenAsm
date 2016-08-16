@@ -112,13 +112,13 @@ UEXIT:
 ; ;*************************************************************************
 ; ;	На RX что-то приходит
 ; ;*************************************************************************
-; ;//2 байт: [Команда; данные]
+; ;//4 байта: [Заголовок; Команда; данные; контрольная сумма]
 ; ;//			0 :n	- ничего не делать
-; ;//			11:x    - вернуть аналоговый режим
 ; ;//			22:x	- цифровое управление, режим x;
 ; ;//			30:x	- записать амплитуду несущей (CARAR) 
 ; ;//			31:n    - записать частоту несущей (T1NVR (OCR1A))
 ; ;//			32:n	- записать частоту инф.сигнала (T2NVR (OCR2))
+; ;//			33:n	- записать амплитуду внутреннего инф. сигнала (MSIGR)
 
 USART_RX:
 USART_RECV1:							;//Считываем 1ый байт
@@ -167,9 +167,6 @@ SKTP:
 	pop		GENI1
 	BRNE	INCORRECT_CHECKSUM			;Если не совпала, выходим
 
-	cpi		GENI1,	11
-	BREQ	setAmode
-
 	cpi		GENI1,	22
 	BREQ	setdMOde
 
@@ -182,6 +179,9 @@ SKTP:
 	cpi		GENI1,	32
 	BREQ	writeT2NVR
 
+	cpi		GENI1,	33
+	breq	writeMSIGR
+
 	ldi		GENI1,	2					;Неизвестная команда
 	rjmp INT_PREP_EX
 
@@ -190,7 +190,7 @@ writeCARAR:
 	rjmp	INT_PREP_EX
 
 setdMode:
-	rcall STOP_ALL					;//Очищаем стек
+	rcall STOP_ALL					;Останавливаем все таймеры
 	
 	ldi GENI1,	0
 	out GICR,	GENI1
@@ -201,7 +201,7 @@ setdMode:
 	sbrc	GENR1,	7
 	ldi		GENR1,	1
 	
-	UART_SEND GENI1
+	UART_SEND		GENI1
 	
 	cpi GENI2,	1
 	BRNE dmd1
@@ -213,12 +213,6 @@ dmd1:
 dmd2:
 rjmp dmode2
 
-setAmode:
-	rcall STOP_ALL
-	ldi GENI1,	(1<<INT0)
-	out GICR,	GENI1	
-	;rjmp amode1	
-
 writeT1NVR:
 	mov		T1NVR,	GENI2
 	rjmp	INT_PREP_EX
@@ -228,6 +222,11 @@ writeT2NVR:
 	mov		GENI1,	GENI2
 	rjmp	INT_PREP_EX
 
+writeMSIGR:
+	mov		MSIGR,	GENI2
+	mov		GENI1,	GENI2
+	rjmp	UR1_EXIT
+
 INCORRECT_CHECKSUM:					;Ошибка - контрольная сумма не совпала
 	ldi		GENI1,		3
 	rjmp	UR1_EXIT
@@ -236,7 +235,7 @@ NOT_HEADER:							;Ошибка - переданный байт не загол�
 	rjmp	UR1_EXIT
 INT_PREP_EX:
 UR1_EXIT:
-	UART_SEND GENI1
+	UART_SEND	GENI1
 reti
 
 
