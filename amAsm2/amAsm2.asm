@@ -1,4 +1,4 @@
-.include "m8def.inc"
+﻿.include "m8def.inc"
 
 ;Таблица векторов прерываний
 ;***********************************
@@ -76,7 +76,7 @@ START:
 	out		DDRB,	GENR2
 
 	clr		GENR1
-	rjmp	setDmode
+	rjmp	dMode1
 
 .include "dmodes.asm"
 
