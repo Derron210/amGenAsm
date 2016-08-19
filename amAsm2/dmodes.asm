@@ -21,8 +21,7 @@ dmode1:
 	ldi		GENR2,	0b0000000
 	out		TCCR0,	GENR2
 
-	ldi		GENR2,	200
-	out		OCR1AL,	GENR2
+	out		OCR1AL,	T1NVR
 
 	ldi		GENR2,	(0<<COM1A1) | (0<<COM1A0) | (0<<COM1B1) | (0<<COM1B0) | (0<<FOC1A) | (0<<FOC1B) | (0<<WGM11) | (0<<WGM10)
 	out		TCCR1A,	GENR2
@@ -36,15 +35,11 @@ dmode1:
 
 	sbrs	STATR,		0		;Если первый бит START - 1, то  запускаем таймер для генерации внутр. сигнала
 	rjmp	dloop1
-	
-	ldi		GENR1,		100
-	mov		SIGAR,		GENR1
-	
+		
 	ldi		GENR1,		(1<<WGM21) | (1<<CS21) | (1<<CS20)
 	out		TCCR2,		GENR1
 
-	ldi		GENR1,		100
-	out		OCR2,		GENR1
+	out		OCR2,		T2NVR
 	in		GENR1,		TIMSK
 	ori		GENR1,		(1<<OCIE2)
 	out		TIMSK,		GENR1

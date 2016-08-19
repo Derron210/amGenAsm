@@ -75,6 +75,12 @@ START:
 	ldi		GENR2,	0b00111111			
 	out		DDRB,	GENR2
 
+	ldi		GENR1,	100
+	mov		T1NVR,	GENR1
+	mov		CARAR,	GENR1
+	mov		SIGAR,	GENR1
+	mov		T2NVR,	GENR1
+
 	clr		GENR1
 	rjmp	dMode1
 
