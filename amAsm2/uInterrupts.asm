@@ -57,6 +57,8 @@ int_tm1_exit:
 	lsr		GENI1														;Два раза поделим на 2, т.к. PB7 и PB6 не используются
 	out		PORTB,	GENI1
 	out		TCNT1L,	NULL
+	sbic	UCSRA,	RXC
+	rjmp	USART_RX
 reti
 
 
