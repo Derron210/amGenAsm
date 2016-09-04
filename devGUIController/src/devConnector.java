@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import jssc.SerialPort;
 import jssc.SerialPortException;
@@ -69,12 +71,19 @@ public class devConnector
                 return answ;
 	}
 	
-	public void closePort() throws SerialPortException
+	public boolean closePort()
 	{
+            
 		if(port.isOpened())
 		{
-			port.closePort();
+                    try {
+                        return port.closePort();
+                    } catch (SerialPortException ex) {
+                        Logger.getLogger(devConnector.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
 		}
+                return true;
 	}
 	
 	protected void finalize()
