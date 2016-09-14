@@ -27,7 +27,7 @@ SINAR:
 
 ;Константы
 ;***********************************
-.equ	BUFHEADER		=	150			;Заголовок пакета UART
+.equ   BUFHEADER		=	150			;Заголовок пакета UART
 .equ   MODE_INTGEN		=	7			;НОМЕР бита регистра MOEDER, 0-внешний сигнал, 1- внутрений
 .equ   ARRAY_SIZE		=	64			;Размер массива значений синусоиды
 ;***********************************
@@ -84,6 +84,7 @@ START:
 	mov		CARAR,	GENR1
 
 	clr		GENR1
+	clr	BUFPR
 	rjmp	dMode1
 
 .include "dmodes.asm"

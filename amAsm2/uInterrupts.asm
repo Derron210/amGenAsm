@@ -85,11 +85,11 @@ reti
 ;*************************************************************************
 TIMER_2_COMP:
 	out		OCR2,		T2NVR
-	andi	XL,			ARRAY_SIZE-1
+	andi		XL,		ARRAY_SIZE-1
 	ld		GENI1,		X+
-	subi	GENI1,		128
+	subi		GENI1,		128
 	mov		GENI2,		SIGAR
-	fmul	GENI1,		GENI2
+	fmul		GENI1,		GENI2
 	mov		MSIGR,		R1
 reti
 
@@ -126,28 +126,28 @@ USART_RX:
 USART_RECV1:							;//Считываем 1ый байт
 	sbis	UCSRA,		RXC
 	rjmp	USART_recv1
-	in		GENI1,		UDR
+	in	GENI1,		UDR
 
-	cpi		BUFPR,		0				;Если первый байт в пакете
+	cpi	BUFPR,		0				;Если первый байт в пакете
 	BRNE	SKTP
 	cpi		GENI1,		BUFHEADER		;То он должен быть равен заголовку
 	BREQ	buffst
 	rjmp	NOT_HEADER
 buffst:									;Запись в буфер заголовка
-	sts		uartBuf,	GENI1
-	inc		BUFPR
-	ldi		GENI1,		1				;Код состояния для выхода
+	sts	uartBuf,	GENI1
+	inc	BUFPR
+	ldi	GENI1,		1				;Код состояния для выхода
 	rjmp	UR1_EXIT
 
 SKTP:
 	push	Xl
 	push	Xh
-	ldi		Xl,		low(uartBuf)
-	ldi		XH,		high(uartBuf)
-	add		XL,		BUFPR				;Записываем на нужную позицию в буфере
-	st		X,		GENI1
-	pop		Xh
-	pop		XL
+	ldi	Xl,		low(uartBuf)
+	ldi	XH,		high(uartBuf)
+	add	XL,		BUFPR				;Записываем на нужную позицию в буфере
+	st	X,		GENI1
+	pop	Xh
+	pop	XL
 	inc     BUFPR
 
 	ldi		GENI3,	4
@@ -225,24 +225,27 @@ dmd4:
 rjmp dmode1
 
 writeT1NVR:
-	mov		T1NVR,	GENI2
+	mov	T1NVR,	GENI2
 	rjmp	INT_PREP_EX
 
 writeT2NVR:
-	mov		T2NVR,	GENI2
-	mov		GENI1,	GENI2
+	mov	T2NVR,	GENI2
+	mov	GENI1,	GENI2
 	rjmp	INT_PREP_EX
 
 writeSIGAR:
-	mov		SIGAR,	GENI2
-	mov		GENI1,	GENI2
+	mov	GENI1,	GENI2
+	ldi	GENI3,	128
+	add	GENI2,	GENI3
+	mov	SIGAR,	GENI2
+
 	rjmp	UR1_EXIT
 
 INCORRECT_CHECKSUM:					;Ошибка - контрольная сумма не совпала
-	ldi		GENI1,		3
+	ldi	GENI1,		3
 	rjmp	UR1_EXIT
 NOT_HEADER:							;Ошибка - переданный байт не заголовок
-	ldi		GENI1,		0
+	ldi	GENI1,		0
 	rjmp	UR1_EXIT
 INT_PREP_EX:
 UR1_EXIT:
