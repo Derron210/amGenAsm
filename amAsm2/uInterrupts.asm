@@ -85,12 +85,14 @@ reti
 ;*************************************************************************
 TIMER_2_COMP:
 	out		OCR2,		T2NVR
-	andi		XL,		ARRAY_SIZE-1
+	andi	XL,		    ARRAY_SIZE-1
 	ld		GENI1,		X+
-	subi		GENI1,		128
 	mov		GENI2,		SIGAR
-	fmul		GENI1,		GENI2
-	mov		MSIGR,		R1
+	fmulsu	GENI1,		GENI2
+	ldi		GENI3,		128
+	mov		GENI1,		R1
+	add		GENI1,		GENI3
+	mov		MSIGR,		GENI1
 reti
 
 
@@ -235,8 +237,6 @@ writeT2NVR:
 
 writeSIGAR:
 	mov	GENI1,	GENI2
-	ldi	GENI3,	128
-	add	GENI2,	GENI3
 	mov	SIGAR,	GENI2
 
 	rjmp	UR1_EXIT
