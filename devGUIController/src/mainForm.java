@@ -2,9 +2,11 @@ import java.awt.List;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
@@ -162,6 +164,11 @@ public class mainForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taLog);
 
         chb_signalSource.setText("Внутренний/ внешний инф. сигнал");
+        chb_signalSource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chb_signalSourceActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Частота несущей");
 
@@ -289,6 +296,12 @@ public class mainForm extends javax.swing.JFrame {
 
     private void modeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modeChanged
        javax.swing.JRadioButton j =  (javax.swing.JRadioButton) evt.getSource();
+       changeMode(j);
+
+    }//GEN-LAST:event_modeChanged
+
+    private void changeMode(AbstractButton j)
+    {
        try{  
        int sigSource;
        if(chb_signalSource.isSelected()) sigSource = dc.INTERNAL;
@@ -310,8 +323,8 @@ public class mainForm extends javax.swing.JFrame {
        {
            Logger.getLogger(mainForm.class.getName()).log(Level.SEVERE, null, ex);
        }
-    }//GEN-LAST:event_modeChanged
-
+    }
+    
     private void sliderChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderChange
         JSlider slider = (JSlider) evt.getSource();
         int value = slider.getValue();
@@ -340,6 +353,18 @@ public class mainForm extends javax.swing.JFrame {
         String[] names = jssc.SerialPortList.getPortNames();
         portsBox.setModel(new DefaultComboBoxModel(names));
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void chb_signalSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chb_signalSourceActionPerformed
+        Enumeration m= modeGroup.getElements();
+        while(m.hasMoreElements())
+        {
+            AbstractButton e = (AbstractButton) m.nextElement();
+            if(e.isSelected()){
+                changeMode(e);
+                break;
+            }
+        }
+    }//GEN-LAST:event_chb_signalSourceActionPerformed
 
     /**
      * @param args the command line arguments
