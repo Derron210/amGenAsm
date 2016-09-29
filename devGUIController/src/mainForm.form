@@ -245,6 +245,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x412;&#x43d;&#x443;&#x442;&#x440;&#x435;&#x43d;&#x43d;&#x438;&#x439;/ &#x432;&#x43d;&#x435;&#x448;&#x43d;&#x438;&#x439; &#x438;&#x43d;&#x444;. &#x441;&#x438;&#x433;&#x43d;&#x430;&#x43b;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chb_signalSourceActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
