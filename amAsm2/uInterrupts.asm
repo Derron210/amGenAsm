@@ -190,10 +190,6 @@ SKTP:
 	ldi		GENI1,	2					;Неизвестная команда
 	rjmp INT_PREP_EX
 
-writeCARAR:
-	mov		CARAR,	GENI2
-	rjmp	INT_PREP_EX
-
 setdMode:
 	rcall STOP_ALL					;Останавливаем все таймеры
 	
@@ -224,7 +220,15 @@ dmd3:
 	brne	dmd4
 	rjmp	dmode4
 dmd4:
+	cpi		GENI2,	5
+	brne	dmd5
+	rjmp	dmode5
+dmd5:
 rjmp dmode1
+
+writeCARAR:
+	mov		CARAR,	GENI2
+	rjmp	INT_PREP_EX
 
 writeT1NVR:
 	mov	T1NVR,	GENI2
