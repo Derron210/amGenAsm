@@ -75,7 +75,18 @@ START:
 	ldi		GENR2,	0b00111111			
 	out		DDRB,	GENR2
 
-	ldi		GENR1,	100
+	ldi		GENR1,  0
+	out		DDRD,	GENR1
+	ldi		GENR1,	(1<<PD6) | (1<<PD5)		;Считываем вариант
+	out		PORTD,	GENR1
+	in		GENR1,	PIND
+	lsr		GENR1
+	lsr		GENR1
+	lsr		GENR1
+	lsr		GENR1
+	lsr		GENR1
+	sts		VARIANT,	GENR1
+
 	mov		T1NVR,	GENR1
 	mov		SIGAR,	GENR1
 	mov		T2NVR,	GENR1
@@ -84,7 +95,7 @@ START:
 	mov		CARAR,	GENR1
 
 	clr		GENR1
-	clr	BUFPR
+	clr		BUFPR
 	rjmp	dMode5
 
 .include "dmodes.asm"
