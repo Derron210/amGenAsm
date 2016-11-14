@@ -221,3 +221,58 @@ dloop4:
 	mov		GENR1,	SIGAR
 	mov		MSIGR,	GENR1
 rjmp dloop4
+
+
+;//*************************************************************************
+;//СМХ
+;//Пока только один вар.	Вырисовывается кривая
+;//*************************************************************************
+AR1AR: .db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 9, 14, 20, 27, 35, 44
+	   .db 54, 64, 76, 87, 99, 111, 124, 136, 149, 161, 173, 184, 195, 205, 215, 223, 231, 238, 243, 248, 251, 253, 254, 254, 254, 254
+
+dmode5:
+	rcall clearstack
+	cli
+	
+	;Грузим значения варианта смх в оперативную память
+	push    ZL
+	push	ZH
+	push    YL
+	push	YH
+	ldi		GENR1,	0
+	ldi		YL,		LOW(aSmh)
+	ldi		YH,		HIGH(aSmh)
+	ldi		ZL,		LOW(AR1AR*2)	;Считываем адрес массива значений синусоиды
+	ldi		ZH,		HIGH(AR1AR*2)
+	ldi		GENR1,	ARRAY_SIZE
+_laloop:
+	lpm		GENR2,	Z+
+	st		Y+,		GENR2
+	dec		GENR1
+	cpse	GENR1,	NULL
+	rjmp	_laloop
+	
+	pop		YH
+	pop		YL
+	ldi		ZL,		LOW(aSmh)	
+	ldi		ZH,		HIGH(aSmh)
+	
+dloop5:
+	ld		GENR1,	Z+				;Считываем адрес
+	andi	ZL,		ARRAY_SIZE-1
+	sts		smhZL,	ZL				;Сохраняем Z в оперативную память, а потом вытаскиваем пред. знач. из стэка
+	sts		smhZH,	ZH
+	pop		ZH
+	pop		ZL
+	sei								;Включаем прерывания, в это время может смениться режим или еще-что нибудь
+
+	lsr		GENR1
+	lsr		GENR1
+	out		PORTB,	GENR1
+			
+	cli								;Выключаем прерывания, сохраняем Z в стэк, и записываем в Z сохраненное знач Z из опертив. памяти		
+	push	ZL
+	push	ZH
+	lds		ZL,		smhZL
+	lds		ZH,		smhZH
+rjmp dloop5

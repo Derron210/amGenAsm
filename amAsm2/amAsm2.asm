@@ -85,7 +85,7 @@ START:
 
 	clr		GENR1
 	clr	BUFPR
-	rjmp	dMode1
+	rjmp	dMode5
 
 .include "dmodes.asm"
 
@@ -164,11 +164,18 @@ ret
 ;***********************************
 
 .dseg
-uartBuf:				.byte 4				;Буфер: заголовок, номер команды, параметр, контрольная сумма
-TIMER_1_COMP_A_vect:	.byte 2				;Указатель на начало прерывания
-MODE_START_VECT:		.byte 2				;Указатель на начало режима
+uartBuf:				.byte 4			;Буфер: заголовок, номер команды, параметр, контрольная сумма
+TIMER_1_COMP_A_vect:	.byte 2			;Указатель на начало прерывания
+MODE_START_VECT:		.byte 2			;Указатель на начало режима
 PM_POINTER:				.byte 1	
+VARIANT:				.byte 1			;Номер варианта для СМХ
+smhZL:					.byte 1			;ZL для перебора массива СМХ
+smhZH:					.byte 1			;ZH для перебора массива СМХ
 
 
-.org  0x100		;После такого, ZH обязательно в 1  !!!!!!!!!!!
-aSIN: .byte ARRAY_SIZE
+.org  0x100					;После такого, ZH обязательно в 1  !!!!!!!!!!!
+aSIN: .byte ARRAY_SIZE		;Массив синусиоды 
+
+.org  0x200					;ZH = 2; Для того, чтобы отсчет массива по ZL начинался с 0
+aSMH: .byte ARRAY_SIZE		;Массив значений СМХ
+	

@@ -144,12 +144,12 @@ buffst:									;Запись в буфер заголовка
 SKTP:
 	push	Xl
 	push	Xh
-	ldi	Xl,		low(uartBuf)
-	ldi	XH,		high(uartBuf)
-	add	XL,		BUFPR				;Записываем на нужную позицию в буфере
-	st	X,		GENI1
-	pop	Xh
-	pop	XL
+	ldi		Xl,		low(uartBuf)
+	ldi		XH,		high(uartBuf)
+	add		XL,		BUFPR				;Записываем на нужную позицию в буфере
+	st		X,		GENI1
+	pop		Xh
+	pop		XL
 	inc     BUFPR
 
 	ldi		GENI3,	4
