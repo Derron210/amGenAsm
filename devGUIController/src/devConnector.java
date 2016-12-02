@@ -22,6 +22,7 @@ public class devConnector
         public final int AM_MODE = 1;
         public final int FM_MODE = 2;
         public final int PM_MODE = 3;
+        public final int SMH     = 5;
         
 	private SerialPort port;
         

@@ -301,5 +301,5 @@ print_smh:
 	out		PORTB,	GENR1
 	cli								;Выключаем прерывания, сохраняем Z в стэк, и записываем в Z сохраненное знач Z из опертив. памяти					
 	push	ZL
-	push	ZH
+	push		ZH
 rjmp dloop5

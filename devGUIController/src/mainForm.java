@@ -71,7 +71,7 @@ public class mainForm extends javax.swing.JFrame {
         sl_infAmp = new javax.swing.JSlider();
         rb_AM = new javax.swing.JRadioButton();
         rb_FM = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rb_SMH = new javax.swing.JRadioButton();
         rb_PM = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taLog = new javax.swing.JTextArea();
@@ -141,9 +141,9 @@ public class mainForm extends javax.swing.JFrame {
             }
         });
 
-        modeGroup.add(jRadioButton3);
-        jRadioButton3.setText("jRadioButton1");
-        jRadioButton3.addItemListener(new java.awt.event.ItemListener() {
+        modeGroup.add(rb_SMH);
+        rb_SMH.setText("СМХ");
+        rb_SMH.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 modeChanged(evt);
             }
@@ -213,7 +213,7 @@ public class mainForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rb_FM)
-                            .addComponent(jRadioButton3))
+                            .addComponent(rb_SMH))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +257,7 @@ public class mainForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rb_FM, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3))
+                        .addComponent(rb_SMH))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(sl_infAmp, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
@@ -317,6 +317,10 @@ public class mainForm extends javax.swing.JFrame {
        else if (j == rb_FM)
        {
            dc.sendCmd(dc.SETMODE, dc.FM_MODE | sigSource);
+       }
+       else if(j == rb_SMH)
+       {
+            dc.sendCmd(dc.SETMODE, dc.SMH | sigSource);   
        }
        }
        catch(Exception ex)
@@ -420,13 +424,13 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.ButtonGroup modeGroup;
     private javax.swing.JComboBox<String> portsBox;
     private javax.swing.JRadioButton rb_AM;
     private javax.swing.JRadioButton rb_FM;
     private javax.swing.JRadioButton rb_PM;
+    private javax.swing.JRadioButton rb_SMH;
     private javax.swing.JSlider sl_genAmp;
     private javax.swing.JSlider sl_genFreq;
     private javax.swing.JSlider sl_infAmp;

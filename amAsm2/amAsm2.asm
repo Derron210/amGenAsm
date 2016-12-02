@@ -96,7 +96,7 @@ START:
 
 	clr		GENR1
 	clr		BUFPR
-	rjmp	dMode5
+	rjmp	dMode1
 
 .include "dmodes.asm"
 
