@@ -277,12 +277,14 @@ _laloop:
 	sts		smhZH,	ZH
 	
 dloop5:
-	sbrs	STATR,		0
+	sbrc	STATR,		0
 	rjmp	smh_internal
 
 	;Внеш. регулировка СМХ (из регистра CARAR)
-	mov		ZL,		CARAR
-	ld		GENR1,	Z
+	mov		GENR1,  CARAR
+	lsr		GENR1
+	lsr		GENR1
+	mov		ZL,		GENR1
 	rjmp	print_smh
 smh_internal:
 	lds		ZL,		smhZL
@@ -300,6 +302,6 @@ print_smh:
 	lsr		GENR1
 	out		PORTB,	GENR1
 	cli								;Выключаем прерывания, сохраняем Z в стэк, и записываем в Z сохраненное знач Z из опертив. памяти					
-	push	ZL
+	push		ZL
 	push		ZH
 rjmp dloop5
