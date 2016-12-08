@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "amControlBoard", "amControlBoard\amControlBoard.cproj", "{003A2FA0-A9F4-4026-B711-CF361AED2244}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{003A2FA0-A9F4-4026-B711-CF361AED2244}.Debug|AVR.ActiveCfg = Debug|AVR
+		{003A2FA0-A9F4-4026-B711-CF361AED2244}.Debug|AVR.Build.0 = Debug|AVR
+		{003A2FA0-A9F4-4026-B711-CF361AED2244}.Release|AVR.ActiveCfg = Release|AVR
+		{003A2FA0-A9F4-4026-B711-CF361AED2244}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

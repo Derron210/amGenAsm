@@ -1,0 +1,459 @@
+
+amControlBoard.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000246  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000007  00800060  00800060  000002ba  2**0
+                  ALLOC
+  2 .comment      00000030  00000000  00000000  000002ba  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000048  00000000  00000000  000002ea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000042e  00000000  00000000  00000332  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000001a4  00000000  00000000  00000760  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000001ed  00000000  00000000  00000904  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000080  00000000  00000000  00000af4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000211  00000000  00000000  00000b74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000030d  00000000  00000000  00000d85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000038  00000000  00000000  00001092  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	21 c0       	rjmp	.+66     	; 0x46 <__bad_interrupt>
+   4:	20 c0       	rjmp	.+64     	; 0x46 <__bad_interrupt>
+   6:	1f c0       	rjmp	.+62     	; 0x46 <__bad_interrupt>
+   8:	1e c0       	rjmp	.+60     	; 0x46 <__bad_interrupt>
+   a:	1d c0       	rjmp	.+58     	; 0x46 <__bad_interrupt>
+   c:	1c c0       	rjmp	.+56     	; 0x46 <__bad_interrupt>
+   e:	1b c0       	rjmp	.+54     	; 0x46 <__bad_interrupt>
+  10:	1a c0       	rjmp	.+52     	; 0x46 <__bad_interrupt>
+  12:	19 c0       	rjmp	.+50     	; 0x46 <__bad_interrupt>
+  14:	18 c0       	rjmp	.+48     	; 0x46 <__bad_interrupt>
+  16:	17 c0       	rjmp	.+46     	; 0x46 <__bad_interrupt>
+  18:	16 c0       	rjmp	.+44     	; 0x46 <__bad_interrupt>
+  1a:	15 c0       	rjmp	.+42     	; 0x46 <__bad_interrupt>
+  1c:	14 c0       	rjmp	.+40     	; 0x46 <__bad_interrupt>
+  1e:	13 c0       	rjmp	.+38     	; 0x46 <__bad_interrupt>
+  20:	12 c0       	rjmp	.+36     	; 0x46 <__bad_interrupt>
+  22:	11 c0       	rjmp	.+34     	; 0x46 <__bad_interrupt>
+  24:	10 c0       	rjmp	.+32     	; 0x46 <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_clear_bss>:
+  32:	20 e0       	ldi	r18, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	01 c0       	rjmp	.+2      	; 0x3c <.do_clear_bss_start>
+
+0000003a <.do_clear_bss_loop>:
+  3a:	1d 92       	st	X+, r1
+
+0000003c <.do_clear_bss_start>:
+  3c:	a7 36       	cpi	r26, 0x67	; 103
+  3e:	b2 07       	cpc	r27, r18
+  40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
+  42:	48 d0       	rcall	.+144    	; 0xd4 <main>
+  44:	fe c0       	rjmp	.+508    	; 0x242 <_exit>
+
+00000046 <__bad_interrupt>:
+  46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
+
+00000048 <getMode>:
+volatile unsigned char infFreq;
+
+ char getMode(char val)
+{
+	//val = ~(val & 0b00111100) & 0b00111100;
+	val = (val ^ pindState) & 0b00111100;
+  48:	90 91 65 00 	lds	r25, 0x0065
+  4c:	89 27       	eor	r24, r25
+  4e:	8c 73       	andi	r24, 0x3C	; 60
+	switch(val)
+  50:	88 30       	cpi	r24, 0x08	; 8
+  52:	89 f0       	breq	.+34     	; 0x76 <getMode+0x2e>
+  54:	18 f4       	brcc	.+6      	; 0x5c <getMode+0x14>
+  56:	84 30       	cpi	r24, 0x04	; 4
+  58:	31 f0       	breq	.+12     	; 0x66 <getMode+0x1e>
+  5a:	0b c0       	rjmp	.+22     	; 0x72 <getMode+0x2a>
+  5c:	80 31       	cpi	r24, 0x10	; 16
+  5e:	29 f0       	breq	.+10     	; 0x6a <getMode+0x22>
+  60:	80 32       	cpi	r24, 0x20	; 32
+  62:	29 f0       	breq	.+10     	; 0x6e <getMode+0x26>
+  64:	06 c0       	rjmp	.+12     	; 0x72 <getMode+0x2a>
+	{
+		case AM_BUTTON: return AM_MODE;
+  66:	81 e0       	ldi	r24, 0x01	; 1
+  68:	08 95       	ret
+		case FM_BUTTON: return FM_MODE;
+		case PM_BUTTON: return PM_MODE;
+  6a:	83 e0       	ldi	r24, 0x03	; 3
+  6c:	08 95       	ret
+		case SMH_BUTTON: return SMH;
+  6e:	85 e0       	ldi	r24, 0x05	; 5
+  70:	08 95       	ret
+		default: return UNKNOWN;
+  72:	80 e0       	ldi	r24, 0x00	; 0
+  74:	08 95       	ret
+	//val = ~(val & 0b00111100) & 0b00111100;
+	val = (val ^ pindState) & 0b00111100;
+	switch(val)
+	{
+		case AM_BUTTON: return AM_MODE;
+		case FM_BUTTON: return FM_MODE;
+  76:	82 e0       	ldi	r24, 0x02	; 2
+		case PM_BUTTON: return PM_MODE;
+		case SMH_BUTTON: return SMH;
+		default: return UNKNOWN;
+	}
+}
+  78:	08 95       	ret
+
+0000007a <setLEDs>:
+	send(BUFHEADER ^ cmd ^ param);
+}
+
+void setLEDs(char ledState)	//Если бит = 0, то DDRD = 1, PORTD= 0;
+{
+	ledState = ~ledState & 0b01111111;//| 0b10000000;
+  7a:	80 95       	com	r24
+  7c:	8f 77       	andi	r24, 0x7F	; 127
+	DDRD  = (~DDRD & ledState);
+  7e:	91 b3       	in	r25, 0x11	; 17
+  80:	90 95       	com	r25
+  82:	98 23       	and	r25, r24
+  84:	91 bb       	out	0x11, r25	; 17
+	PORTD = ~(PORTD & ledState);
+  86:	92 b3       	in	r25, 0x12	; 18
+  88:	89 23       	and	r24, r25
+  8a:	80 95       	com	r24
+  8c:	82 bb       	out	0x12, r24	; 18
+  8e:	08 95       	ret
+
+00000090 <send>:
+}
+
+void send(unsigned char c)
+{
+	while (!( UCSRA & (1<<UDRE)));
+  90:	5d 9b       	sbis	0x0b, 5	; 11
+  92:	fe cf       	rjmp	.-4      	; 0x90 <send>
+	UDR = c;	
+  94:	8c b9       	out	0x0c, r24	; 12
+  96:	08 95       	ret
+
+00000098 <sendCommand>:
+		default: return UNKNOWN;
+	}
+}
+
+void sendCommand(char cmd, char param)
+{
+  98:	cf 93       	push	r28
+  9a:	df 93       	push	r29
+  9c:	c8 2f       	mov	r28, r24
+  9e:	d6 2f       	mov	r29, r22
+	send(BUFHEADER);
+  a0:	86 e9       	ldi	r24, 0x96	; 150
+  a2:	90 e0       	ldi	r25, 0x00	; 0
+  a4:	f5 df       	rcall	.-22     	; 0x90 <send>
+	send(cmd);
+  a6:	8c 2f       	mov	r24, r28
+  a8:	90 e0       	ldi	r25, 0x00	; 0
+  aa:	f2 df       	rcall	.-28     	; 0x90 <send>
+	send(param);
+  ac:	8d 2f       	mov	r24, r29
+  ae:	90 e0       	ldi	r25, 0x00	; 0
+  b0:	ef df       	rcall	.-34     	; 0x90 <send>
+	send(BUFHEADER ^ cmd ^ param);
+  b2:	86 e9       	ldi	r24, 0x96	; 150
+  b4:	d8 27       	eor	r29, r24
+  b6:	8d 2f       	mov	r24, r29
+  b8:	8c 27       	eor	r24, r28
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	e9 df       	rcall	.-46     	; 0x90 <send>
+}
+  be:	df 91       	pop	r29
+  c0:	cf 91       	pop	r28
+  c2:	08 95       	ret
+
+000000c4 <readADC>:
+	UDR = c;	
+}
+
+unsigned char readADC(unsigned char pin)
+{
+	ADMUX = (1<<REFS0) | (1<<ADLAR) | pin;
+  c4:	80 66       	ori	r24, 0x60	; 96
+  c6:	87 b9       	out	0x07, r24	; 7
+	ADCSRA = (1<<ADEN) | (1<<ADSC) | 0b111;
+  c8:	87 ec       	ldi	r24, 0xC7	; 199
+  ca:	86 b9       	out	0x06, r24	; 6
+	while (ADCSRA & (1<<ADSC));
+  cc:	36 99       	sbic	0x06, 6	; 6
+  ce:	fe cf       	rjmp	.-4      	; 0xcc <readADC+0x8>
+	return ADCH;	
+  d0:	85 b1       	in	r24, 0x05	; 5
+}
+  d2:	08 95       	ret
+
+000000d4 <main>:
+
+int main(void)
+{
+	DDRD = 0;
+  d4:	11 ba       	out	0x11, r1	; 17
+	PORTD = 0xFF;
+  d6:	8f ef       	ldi	r24, 0xFF	; 255
+  d8:	82 bb       	out	0x12, r24	; 18
+	UBRRH = 0;
+  da:	10 bc       	out	0x20, r1	; 32
+	UBRRL = UARTRATE;
+  dc:	87 e6       	ldi	r24, 0x67	; 103
+  de:	89 b9       	out	0x09, r24	; 9
+	UCSRB = (1<<RXEN) | (1<<TXEN) ;
+  e0:	88 e1       	ldi	r24, 0x18	; 24
+  e2:	8a b9       	out	0x0a, r24	; 10
+	UCSRC = (1<<URSEL) | (1<<USBS) | (3<<UCSZ0);
+  e4:	8e e8       	ldi	r24, 0x8E	; 142
+  e6:	80 bd       	out	0x20, r24	; 32
+	pindState = PIND & 0b11111100;
+  e8:	80 b3       	in	r24, 0x10	; 16
+  ea:	8c 7f       	andi	r24, 0xFC	; 252
+  ec:	80 93 65 00 	sts	0x0065, r24
+	source = 0b10000000;
+  f0:	80 e8       	ldi	r24, 0x80	; 128
+  f2:	80 93 63 00 	sts	0x0063, r24
+    while(1)
+    {
+		char newState = PIND & 0b11111100;
+  f6:	80 b3       	in	r24, 0x10	; 16
+		if(pindState != newState)
+  f8:	90 91 65 00 	lds	r25, 0x0065
+	UCSRC = (1<<URSEL) | (1<<USBS) | (3<<UCSZ0);
+	pindState = PIND & 0b11111100;
+	source = 0b10000000;
+    while(1)
+    {
+		char newState = PIND & 0b11111100;
+  fc:	8c 7f       	andi	r24, 0xFC	; 252
+		if(pindState != newState)
+  fe:	98 17       	cp	r25, r24
+ 100:	b1 f1       	breq	.+108    	; 0x16e <main+0x9a>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 102:	2f ef       	ldi	r18, 0xFF	; 255
+ 104:	89 ef       	ldi	r24, 0xF9	; 249
+ 106:	90 e0       	ldi	r25, 0x00	; 0
+ 108:	21 50       	subi	r18, 0x01	; 1
+ 10a:	80 40       	sbci	r24, 0x00	; 0
+ 10c:	90 40       	sbci	r25, 0x00	; 0
+ 10e:	e1 f7       	brne	.-8      	; 0x108 <main+0x34>
+ 110:	00 c0       	rjmp	.+0      	; 0x112 <main+0x3e>
+ 112:	00 00       	nop
+		{
+			_delay_ms(20);					//Защита от дребезга контактов
+			newState = PIND & 0b11111100;
+ 114:	c0 b3       	in	r28, 0x10	; 16
+ 116:	cc 7f       	andi	r28, 0xFC	; 252
+			char newSource = PIND & 0b10000000;
+ 118:	10 b3       	in	r17, 0x10	; 16
+			if(pindState != newState)
+ 11a:	80 91 65 00 	lds	r24, 0x0065
+ 11e:	8c 17       	cp	r24, r28
+ 120:	31 f1       	breq	.+76     	; 0x16e <main+0x9a>
+		char newState = PIND & 0b11111100;
+		if(pindState != newState)
+		{
+			_delay_ms(20);					//Защита от дребезга контактов
+			newState = PIND & 0b11111100;
+			char newSource = PIND & 0b10000000;
+ 122:	10 78       	andi	r17, 0x80	; 128
+			if(pindState != newState)
+			{
+				unsigned char newMode = getMode(newState);	//Получаем новый режим
+ 124:	8c 2f       	mov	r24, r28
+ 126:	90 df       	rcall	.-224    	; 0x48 <getMode>
+ 128:	d8 2f       	mov	r29, r24
+				if (newMode == UNKNOWN)
+ 12a:	81 11       	cpse	r24, r1
+ 12c:	0c c0       	rjmp	.+24     	; 0x146 <main+0x72>
+				{
+					if(source != newSource)(sendCommand(CMD_MODE, mode | newSource));
+ 12e:	80 91 63 00 	lds	r24, 0x0063
+ 132:	81 17       	cp	r24, r17
+ 134:	29 f0       	breq	.+10     	; 0x140 <main+0x6c>
+ 136:	60 91 62 00 	lds	r22, 0x0062
+ 13a:	61 2b       	or	r22, r17
+ 13c:	86 e1       	ldi	r24, 0x16	; 22
+ 13e:	ac df       	rcall	.-168    	; 0x98 <sendCommand>
+					source = newSource;
+ 140:	10 93 63 00 	sts	0x0063, r17
+					goto ext;		//Если неизвестный режим то выходим
+ 144:	10 c0       	rjmp	.+32     	; 0x166 <main+0x92>
+				}
+				if (mode != newMode){
+ 146:	80 91 62 00 	lds	r24, 0x0062
+ 14a:	8d 17       	cp	r24, r29
+ 14c:	41 f0       	breq	.+16     	; 0x15e <main+0x8a>
+					 sendCommand(CMD_MODE, newMode | newSource);
+ 14e:	6d 2f       	mov	r22, r29
+ 150:	61 2b       	or	r22, r17
+ 152:	86 e1       	ldi	r24, 0x16	; 22
+ 154:	a1 df       	rcall	.-190    	; 0x98 <sendCommand>
+					 setLEDs(newState | mode);
+ 156:	80 91 62 00 	lds	r24, 0x0062
+ 15a:	8c 2b       	or	r24, r28
+ 15c:	8e df       	rcall	.-228    	; 0x7a <setLEDs>
+					}	
+			mode = newMode;
+ 15e:	d0 93 62 00 	sts	0x0062, r29
+			source = newSource;
+ 162:	10 93 63 00 	sts	0x0063, r17
+			ext: pindState =  PIND & 0b11111100; 	
+ 166:	80 b3       	in	r24, 0x10	; 16
+ 168:	8c 7f       	andi	r24, 0xFC	; 252
+ 16a:	80 93 65 00 	sts	0x0065, r24
+			}
+		}
+		unsigned char tempr;
+		tempr = readADC(PINC4);
+ 16e:	84 e0       	ldi	r24, 0x04	; 4
+ 170:	a9 df       	rcall	.-174    	; 0xc4 <readADC>
+ 172:	c8 2f       	mov	r28, r24
+		if((tempr > carAmpl+10)||(tempr<carAmpl-10)) { 
+ 174:	28 2f       	mov	r18, r24
+ 176:	30 e0       	ldi	r19, 0x00	; 0
+ 178:	40 91 64 00 	lds	r20, 0x0064
+ 17c:	50 e0       	ldi	r21, 0x00	; 0
+ 17e:	46 5f       	subi	r20, 0xF6	; 246
+ 180:	5f 4f       	sbci	r21, 0xFF	; 255
+ 182:	42 17       	cp	r20, r18
+ 184:	53 07       	cpc	r21, r19
+ 186:	44 f0       	brlt	.+16     	; 0x198 <main+0xc4>
+ 188:	40 91 64 00 	lds	r20, 0x0064
+ 18c:	50 e0       	ldi	r21, 0x00	; 0
+ 18e:	4a 50       	subi	r20, 0x0A	; 10
+ 190:	51 09       	sbc	r21, r1
+ 192:	24 17       	cp	r18, r20
+ 194:	35 07       	cpc	r19, r21
+ 196:	2c f4       	brge	.+10     	; 0x1a2 <main+0xce>
+			sendCommand(CAR_AMPL, tempr);
+ 198:	6c 2f       	mov	r22, r28
+ 19a:	8e e1       	ldi	r24, 0x1E	; 30
+ 19c:	7d df       	rcall	.-262    	; 0x98 <sendCommand>
+			carAmpl = tempr;
+ 19e:	c0 93 64 00 	sts	0x0064, r28
+		}
+		tempr = readADC(PINC3);
+ 1a2:	83 e0       	ldi	r24, 0x03	; 3
+ 1a4:	8f df       	rcall	.-226    	; 0xc4 <readADC>
+ 1a6:	c8 2f       	mov	r28, r24
+		if((tempr > carFreq+10)||(tempr<carFreq-10)) {
+ 1a8:	28 2f       	mov	r18, r24
+ 1aa:	30 e0       	ldi	r19, 0x00	; 0
+ 1ac:	40 91 60 00 	lds	r20, 0x0060
+ 1b0:	50 e0       	ldi	r21, 0x00	; 0
+ 1b2:	46 5f       	subi	r20, 0xF6	; 246
+ 1b4:	5f 4f       	sbci	r21, 0xFF	; 255
+ 1b6:	42 17       	cp	r20, r18
+ 1b8:	53 07       	cpc	r21, r19
+ 1ba:	44 f0       	brlt	.+16     	; 0x1cc <main+0xf8>
+ 1bc:	40 91 60 00 	lds	r20, 0x0060
+ 1c0:	50 e0       	ldi	r21, 0x00	; 0
+ 1c2:	4a 50       	subi	r20, 0x0A	; 10
+ 1c4:	51 09       	sbc	r21, r1
+ 1c6:	24 17       	cp	r18, r20
+ 1c8:	35 07       	cpc	r19, r21
+ 1ca:	2c f4       	brge	.+10     	; 0x1d6 <main+0x102>
+			sendCommand(CAR_FREQ, tempr);
+ 1cc:	6c 2f       	mov	r22, r28
+ 1ce:	8f e1       	ldi	r24, 0x1F	; 31
+ 1d0:	63 df       	rcall	.-314    	; 0x98 <sendCommand>
+			carFreq = tempr;
+ 1d2:	c0 93 60 00 	sts	0x0060, r28
+		}		
+		tempr = readADC(PINC2);
+ 1d6:	82 e0       	ldi	r24, 0x02	; 2
+ 1d8:	75 df       	rcall	.-278    	; 0xc4 <readADC>
+ 1da:	c8 2f       	mov	r28, r24
+		if((tempr > infAmpl+10)||(tempr<infAmpl-10)) {
+ 1dc:	28 2f       	mov	r18, r24
+ 1de:	30 e0       	ldi	r19, 0x00	; 0
+ 1e0:	40 91 61 00 	lds	r20, 0x0061
+ 1e4:	50 e0       	ldi	r21, 0x00	; 0
+ 1e6:	46 5f       	subi	r20, 0xF6	; 246
+ 1e8:	5f 4f       	sbci	r21, 0xFF	; 255
+ 1ea:	42 17       	cp	r20, r18
+ 1ec:	53 07       	cpc	r21, r19
+ 1ee:	44 f0       	brlt	.+16     	; 0x200 <main+0x12c>
+ 1f0:	40 91 61 00 	lds	r20, 0x0061
+ 1f4:	50 e0       	ldi	r21, 0x00	; 0
+ 1f6:	4a 50       	subi	r20, 0x0A	; 10
+ 1f8:	51 09       	sbc	r21, r1
+ 1fa:	24 17       	cp	r18, r20
+ 1fc:	35 07       	cpc	r19, r21
+ 1fe:	2c f4       	brge	.+10     	; 0x20a <main+0x136>
+			sendCommand(INF_AMPL, tempr);
+ 200:	6c 2f       	mov	r22, r28
+ 202:	81 e2       	ldi	r24, 0x21	; 33
+ 204:	49 df       	rcall	.-366    	; 0x98 <sendCommand>
+			infAmpl = tempr;
+ 206:	c0 93 61 00 	sts	0x0061, r28
+		}		
+		tempr = readADC(PINC1);
+ 20a:	81 e0       	ldi	r24, 0x01	; 1
+ 20c:	5b df       	rcall	.-330    	; 0xc4 <readADC>
+ 20e:	c8 2f       	mov	r28, r24
+		if((tempr > infFreq+10)||(tempr<infFreq-10)) {
+ 210:	28 2f       	mov	r18, r24
+ 212:	30 e0       	ldi	r19, 0x00	; 0
+ 214:	40 91 66 00 	lds	r20, 0x0066
+ 218:	50 e0       	ldi	r21, 0x00	; 0
+ 21a:	46 5f       	subi	r20, 0xF6	; 246
+ 21c:	5f 4f       	sbci	r21, 0xFF	; 255
+ 21e:	42 17       	cp	r20, r18
+ 220:	53 07       	cpc	r21, r19
+ 222:	4c f0       	brlt	.+18     	; 0x236 <main+0x162>
+ 224:	40 91 66 00 	lds	r20, 0x0066
+ 228:	50 e0       	ldi	r21, 0x00	; 0
+ 22a:	4a 50       	subi	r20, 0x0A	; 10
+ 22c:	51 09       	sbc	r21, r1
+ 22e:	24 17       	cp	r18, r20
+ 230:	35 07       	cpc	r19, r21
+ 232:	0c f0       	brlt	.+2      	; 0x236 <main+0x162>
+ 234:	60 cf       	rjmp	.-320    	; 0xf6 <main+0x22>
+			sendCommand(INF_FREQ, tempr);
+ 236:	6c 2f       	mov	r22, r28
+ 238:	80 e2       	ldi	r24, 0x20	; 32
+ 23a:	2e df       	rcall	.-420    	; 0x98 <sendCommand>
+			infFreq = tempr;
+ 23c:	c0 93 66 00 	sts	0x0066, r28
+ 240:	5a cf       	rjmp	.-332    	; 0xf6 <main+0x22>
+
+00000242 <_exit>:
+ 242:	f8 94       	cli
+
+00000244 <__stop_program>:
+ 244:	ff cf       	rjmp	.-2      	; 0x244 <__stop_program>
