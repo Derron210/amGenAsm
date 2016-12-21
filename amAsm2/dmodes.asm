@@ -281,10 +281,11 @@ dloop5:
 	rjmp	smh_internal
 
 	;Внеш. регулировка СМХ (из регистра CARAR)
-	mov		GENR1,  CARAR
-	lsr		GENR1
-	lsr		GENR1
-	mov		ZL,		GENR1
+	lds		ZH,		smhZH
+	mov		ZL,  CARAR
+	lsr		ZL
+	lsr		ZL
+	ld		GENR1,	Z
 	rjmp	print_smh
 smh_internal:
 	lds		ZL,		smhZL
