@@ -306,3 +306,32 @@ print_smh:
 	push		ZL
 	push		ZH
 rjmp dloop5
+
+
+;//*************************************************************************
+;//Генерация сигналов
+;//В GENR1 тип сигнала: 1- синус, 2 - прямоугольник
+;//*************************************************************************
+dmode6:
+	rcall clearstack
+	clr		STATR
+	andi	GENR1,		1
+	or		STATR,		GENR1		;Режим инф. сигнала внешний/внутренний
+	ldi		GENR1,		3
+	lsl		GENR1
+	or		STATR,		GENR1		;Номер режима
+
+	out		OCR1AL,	T1NVR
+
+	ldi		GENR2,	(0<<COM1A1) | (0<<COM1A0) | (0<<COM1B1) | (0<<COM1B0) | (0<<FOC1A) | (0<<FOC1B) | (0<<WGM11) | (0<<WGM10)
+	out		TCCR1A,	GENR2
+	ldi		GENR2,	(0<<ICNC1) | (0<<ICES1) | (0<<WGM13) | (1<<WGM12) | (0<<CS12) | (0<<CS11) | (1<<CS10) 
+	out		TCCR1B,	GENR2
+
+	ldi		ZL,	LOW(GEN_SIN_SIGNAL)
+	ldi		ZH,	HIGH(GEN_SIN_SIGNAL)
+	rcall   GEN_SIN_SIGNAL
+	sei
+dloop6:
+
+rjmp dloop6
