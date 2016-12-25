@@ -40,6 +40,8 @@ SINAR:
 .def	MSIGR = R5						;Знач. внутреннего инф. сигнала
 .def	CARAR = R6						;Регистр содержит амлпитуду несущей - [0; 127] 0 - макс. значение
 .def	SIGAR = R7
+.def	COUNR = R8						;Исп. для установки вых. значения прямоуг. сигнала, если COUNR >= SQLER ->1, else ->0
+.def	SQLER =	R9			;Значение скважности прямоуг. сигнала
 .def	STATR = R15						;Выбор источника информационного сигнала
 .def	GENI1 = R16						;Три регистра общего назначения для ПРЕРЫВАНИЙ
 .def	GENI2 = R17
@@ -94,9 +96,9 @@ START:
 	ldi		GENR1,	255
 	mov		CARAR,	GENR1
 
-	clr		GENR1
+	ldi		GENR1, 2
 	clr		BUFPR
-	rjmp	dMode1
+	rjmp	dMode6
 
 .include "dmodes.asm"
 

@@ -50,6 +50,29 @@ PM_GEN:
 	andi	GENI2,	ARRAY_SIZE-1	
 	sts		PM_POINTER,	GENI2
 pm_skip:
+rjmp int_tm1_exit
+
+;Генерация синусоидального сигнала
+;*************************************************************************
+GEN_SIN_SIGNAL:
+	out		OCR1AL,		T1NVR			;Задаем частоту сигнала
+	ld		GENI1,		Y+				;Считываем значение из таблицы синусов
+	andi	YL,			ARRAY_SIZE-1					
+rjmp int_tm1_exit
+
+;Генерация прямоугольного сигнала
+;*************************************************************************
+GEN_SQUARE_SIGNAL:
+	out		OCR1AL,		T1NVR			;Задаем частоту сигнала
+	inc		COUNR						;Регулировка скважности, когда COUNR >= SQLER сигнал на выходе 1, в противном случае 0
+	ldi		GENI1,		127				
+	cp		COUNR,		SQLER
+	brlo	dnc	
+	clr		GENI1
+dnc:
+rjmp int_tm1_exit
+
+
 int_tm1_exit:
 	ldi		GENI2,	128
 	add		GENI1,	GENI2
@@ -60,19 +83,6 @@ int_tm1_exit:
 	sbic	UCSRA,	RXC
 	rjmp	USART_RX
 reti
-
-;*************************************************************************
-;Генерация синусоидального сигнала
-;*************************************************************************
-GEN_SIN_SIGNAL:
-	out		OCR1AL,		T1NVR			;Задаем частоту сигнала
-	ld		GENI1,		Y+				;Считываем значение из таблицы синусов
-	andi	YL,			ARRAY_SIZE-1					
-	lsr		GENI1
-	lsr		GENI1						;Т.к. используется 6-битный цап необходимо привести знач. к 6 бит
-	out		PORTB,		GENI1			;Выводим на PORTB
-reti
-
 
 ;*************************************************************************
 ;Исп. для дискретизатора
@@ -131,6 +141,7 @@ UEXIT:
 ; ;//4 байта: [Заголовок; Команда; данные; контрольная сумма]
 ; ;//			0 :n	- ничего не делать
 ; ;//			22:x	- цифровое управление, режим x;
+; ;//			23:x	- Генерация сигнала (dmode6), x - тип сигнала
 ; ;//			30:x	- записать амплитуду несущей (CARAR) 
 ; ;//			31:n    - записать частоту несущей (T1NVR (OCR1A))
 ; ;//			32:n	- записать частоту инф.сигнала (T2NVR (OCR2))
@@ -187,6 +198,9 @@ SKTP:
 	cpi		GENI1,	22
 	BREQ	setdMOde
 
+	cpi		GENI1, 23
+	breq	setSigGenMode
+
 	cpi		GENI1,	30
 	BREQ	writeCARAR
 
@@ -201,6 +215,13 @@ SKTP:
 
 	ldi		GENI1,	2					;Неизвестная команда
 	rjmp INT_PREP_EX
+
+setSigGenMode:
+	rcall STOP_ALL	
+	andi	GENI2,	0b01111111
+	mov		GENR1,	GENI2
+	UART_SEND		GENI1
+	rjmp	dmode6
 
 setdMode:
 	rcall STOP_ALL					;Останавливаем все таймеры
