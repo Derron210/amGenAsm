@@ -1,0 +1,3 @@
+avr-gcc -g -Os -mmcu=atmega8 -c amControlBoard.c 
+avr-gcc -g -mmcu=atmega8 -o amControlBoard.elf amControlBoard.o 
+avr-objcopy -j .text -j .data -O ihex amControlBoard.elf amControlBoard.hex 
