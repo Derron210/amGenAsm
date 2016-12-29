@@ -271,21 +271,7 @@ dmode5:
 	ldi		YL,		LOW(aSMH)
 	ldi		YH,		HIGH(aSMH)
 	ldi		GENR1,	ARRAY_SIZE
-rjmp _laloop
 
-	cpi		GENR2,	0				;Варианты
-	brne    j2	
-	ldi		ZL,		LOW(AR1AR*2)	;Считываем адрес массива значений синусоиды
-	ldi		ZH,		HIGH(AR1AR*2)
-	rjmp j3
-j2:	cpi		GENR2,	1
-;	brne	j3
-	ldi		ZL,		LOW(AR2AR*2)	
-	ldi		ZH,		HIGH(AR2AR*2)
-j3:
-	ldi		YL,		LOW(aSMH)
-	ldi		YH,		HIGH(aSMH)
-	ldi		GENR1,	ARRAY_SIZE
 _laloop:
 	lpm		GENR2,	Z+
 	st		Y+,		GENR2
