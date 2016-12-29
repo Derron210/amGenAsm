@@ -257,8 +257,21 @@ dmode5:
 	push	ZH
 	push    YL
 	push	YH
-	ldi		GENR1,	0
 	lds		GENR2,	VARIANT
+	ldi		GENR2,	12
+	ldi		GENR1,	64
+	muls	GENR1,	GENR2
+
+	ldi		ZH,		HIGH(AR1AR*2)
+	ldi		ZL,		LOW(AR1AR*2)	;Считываем адрес массива значений синусоиды
+	
+	add		ZL,		R0
+	adc		ZH,		R1
+
+	ldi		YL,		LOW(aSMH)
+	ldi		YH,		HIGH(aSMH)
+	ldi		GENR1,	ARRAY_SIZE
+rjmp _laloop
 
 	cpi		GENR2,	0				;Варианты
 	brne    j2	

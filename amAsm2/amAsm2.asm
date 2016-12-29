@@ -98,7 +98,7 @@ START:
 
 	ldi		GENR1, 2
 	clr		BUFPR
-	rjmp	dMode6
+	rjmp	dMode5
 
 .include "dmodes.asm"
 
