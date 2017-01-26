@@ -258,7 +258,6 @@ dmode5:
 	push    YL
 	push	YH
 	lds		GENR2,	VARIANT
-	ldi		GENR2,	12
 	ldi		GENR1,	64
 	muls	GENR1,	GENR2
 
