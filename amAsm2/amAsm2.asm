@@ -82,6 +82,7 @@ START:
 	ldi		GENR1,	(1<<PD6) | (1<<PD5)	| (1<<PD4) | (1<<PD3)	;Считываем вариант
 	out		PORTD,	GENR1
 	in		GENR1,	PIND
+	andi		GENR1,	(1<<PD6) | (1<<PD5)	| (1<<PD4) | (1<<PD3)
 	lsr		GENR1
 	lsr		GENR1
 	lsr		GENR1
@@ -96,7 +97,7 @@ START:
 
 	ldi		GENR1, 2
 	clr		BUFPR
-	rjmp	dMode5
+	rjmp	dMode1
 
 .include "dmodes.asm"
 
