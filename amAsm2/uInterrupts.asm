@@ -110,9 +110,10 @@ TIMER_2_COMP:
 	andi	XL,		    ARRAY_SIZE-1
 	ld		GENI1,		X+
 	mov		GENI2,		SIGAR
-	fmulsu	GENI1,		GENI2
+	LIMIT_OVERFLOW		GENI1,	GENI2,	GENI3
+
+
 	ldi		GENI3,		128
-	mov		GENI1,		R1
 	add		GENI1,		GENI3
 	mov		MSIGR,		GENI1
 reti

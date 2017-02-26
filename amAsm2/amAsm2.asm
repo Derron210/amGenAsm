@@ -41,7 +41,7 @@ SINAR:
 .def	CARAR = R6						;Регистр содержит амлпитуду несущей - [0; 127] 0 - макс. значение
 .def	SIGAR = R7
 .def	COUNR = R8						;Исп. для установки вых. значения прямоуг. сигнала, если COUNR >= SQLER ->1, else ->0
-.def	SQLER =	R9			;Значение скважности прямоуг. сигнала
+.def	SQLER =	R9						;Значение скважности прямоуг. сигнала
 .def	STATR = R15						;Выбор источника информационного сигнала
 .def	GENI1 = R16						;Три регистра общего назначения для ПРЕРЫВАНИЙ
 .def	GENI2 = R17
@@ -51,6 +51,35 @@ SINAR:
 .def	GENR2 =	R21
 .def	GENR3 = R22
 ;***********************************
+
+.macro LIMIT_OVERFLOW		;@0 - знач. синуса; @1 - амплитуда; @2 - временный регистр	;Результат в @0
+	mov		@2,		@0		
+	tst		@2
+	brpl	lm_ov_skg		;Если значение синуса больше 0 идем к lm_ov_skg
+	com		@2				;0xFF - @2 - переводим в удобный вид
+	mul		@2,		@1		;Умножаем на амплитуду
+	mov		@2,		R1
+	cpi		@2,		0x3F	;Сравниваем с макс. значением - если больше, то переполнение
+	brsh	lm_ov_neg_sm
+	fmulsu	@0,		@1
+	mov		@0,		R1
+	rjmp	lm_ov_ext
+lm_ov_neg_sm:
+	ldi		@0,		128
+	rjmp	lm_ov_ext
+lm_ov_skg:
+	mul	@0,		@1
+	mov		@2,		R1
+	cpi		@2,		0x3F
+	brsh	lm_ov_pos_sm
+	fmulsu	@0,		@1
+	mov		@0,		R1
+	rjmp	lm_ov_ext
+lm_ov_pos_sm:
+	ldi		@0,		127
+	rjmp	lm_ov_ext
+lm_ov_ext:
+.endm
 
 START:
 	clr		NULL
@@ -95,9 +124,10 @@ START:
 	ldi		GENR1,	255
 	mov		CARAR,	GENR1
 
-	ldi		GENR1, 2
+	ldi		GENR1, 3
 	clr		BUFPR
 	rjmp	dMode1
+
 
 .include "dmodes.asm"
 
