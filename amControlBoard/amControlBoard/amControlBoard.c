@@ -32,7 +32,7 @@
 #define FM_BUTTON  1<<PD3
 #define PM_BUTTON  1<<PD4
 #define SMH_BUTTON 1<<PD5
-#define BAM_BUTTON  1<<PD6
+#define BAM_BUTTON 1<<PD6
 
 volatile char pindState;
 volatile char mode;
@@ -46,7 +46,7 @@ volatile unsigned char infFreq;
  char getMode(char val)
 {
 	//val = ~(val & 0b00111100) & 0b00111100;
-	val = (val ^ pindState) & 0b00111100;
+	val = (val ^ pindState) & 0b01111100;
 	switch(val)
 	{
 		case AM_BUTTON: return AM_MODE;
