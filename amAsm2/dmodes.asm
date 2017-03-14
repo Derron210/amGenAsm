@@ -348,3 +348,65 @@ isSquareSig:
 dloop6:
 	sei
 rjmp dloop6
+
+
+;//*************************************************************************
+;//Балансная АМ? Тоже самое что просто АМ, но знаковая несущая
+;//В GENR1 - 0 если источник внешний, 1 если внутренний
+;//*************************************************************************
+dmode7:
+	rcall clearstack
+	ldi		GENR1,	3
+	mov		PARAR, GENR1
+	;Настраиваем регистр START
+	clr		STATR
+	andi	GENR1,		1
+	or		STATR,		GENR1		;Режим инф. сигнала внешний/внутренний
+	ldi		GENR1,		7
+	lsl		GENR1
+	or		STATR,		GENR1		;Номер режима
+
+	ldi		ZL,	LOW(BAM_GEN)
+	ldi		ZH,	HIGH(BAM_GEN)
+	rcall   setTimer1COMPAVect
+
+	;Настройка таймеров
+	ldi		GENR2,	0b0000000
+	out		TCCR0,	GENR2
+
+	out		OCR1AL,	T1NVR
+
+	ldi		GENR2,	(0<<COM1A1) | (0<<COM1A0) | (0<<COM1B1) | (0<<COM1B0) | (0<<FOC1A) | (0<<FOC1B) | (0<<WGM11) | (0<<WGM10)
+	out		TCCR1A,	GENR2
+
+	ldi		GENR2,	(0<<ICNC1) | (0<<ICES1) | (0<<WGM13) | (1<<WGM12) | (0<<CS12) | (0<<CS11) | (1<<CS10) 
+	out		TCCR1B,	GENR2
+
+	ldi		GENR2, (1<<OCIE1A)
+	out		TIMSK,	GENR2
+	sei;
+
+	sbrs	STATR,		0		;Если первый бит START - 1, то  запускаем таймер для генерации внутр. сигнала
+	rjmp	dloop7
+		
+	ldi		GENR1,		(1<<WGM21) | (1<<CS21) | (1<<CS20)
+	out		TCCR2,		GENR1
+
+	out		OCR2,		T2NVR
+	in		GENR1,		TIMSK
+	ori		GENR1,		(1<<OCIE2)
+	out		TIMSK,		GENR1
+
+dloop7:
+
+	sbrc	STATR,		0
+	rjmp	dloop7
+	
+	;Если сигнал внешний, то считываем его значение с АЦП
+	ldi		GENR1,		(1<<REFS0) | (1<<ADLAR) | (1<<MUX2) | (1<<MUX0)
+	rcall	getADCSample
+	in		GENR1,		ADCH
+	subi	GENR1,		127
+	mov		MSIGR,		GENR1	
+
+rjmp dloop7

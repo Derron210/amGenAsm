@@ -21,6 +21,20 @@ AM_GEN:				;Обработка прерывания таймера
 	mov		GENI1,	R1													;Приведем к виду [0..255]
 rjmp	int_tm1_exit
 
+BAM_GEN:				;Обработка прерывания таймера
+	out		OCR1AL,	T1NVR
+	andi	YL,		ARRAY_SIZE-1				
+	ld		GENI1,	Y+				
+
+	mov		GENI2,	MSIGR												;Внешний сигнал считывается в цикле с АЦП или в другом прерывании если сигнал внутрений
+
+	muls    GENI1,	GENI2												;Перемножим значение инф. сигнала (беззнаковый) на значение несущей (знаковый)
+
+	mov		GENI2,	R1
+	mov		GENI1,	CARAR
+	fmulsu	GENI2,	GENI1
+	mov		GENI1,	R1													;Приведем к виду [0..255]
+rjmp	int_tm1_exit
 
 FM_GEN:
 	mov		GENI2,	MSIGR
@@ -111,13 +125,14 @@ TIMER_2_COMP:
 	ld		GENI1,		X+
 	mov		GENI2,		SIGAR
 	LIMIT_OVERFLOW		GENI1,	GENI2,	GENI3
-
-
+	ldi		GENI3,		3
+	cp		PARAR,		GENI3
+	BREQ	skip_add_t2c
 	ldi		GENI3,		128
 	add		GENI1,		GENI3
+skip_add_t2c:
 	mov		MSIGR,		GENI1
 reti
-
 
 
 _debug_uart:
@@ -258,6 +273,10 @@ dmd4:
 	brne	dmd5
 	rjmp	dmode5
 dmd5:
+	cpi		GENI2,	7
+	brne	dmd6
+	rjmp	dmode7
+dmd6:
 rjmp dmode1
 
 writeCARAR:

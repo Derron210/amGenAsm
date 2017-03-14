@@ -22,6 +22,7 @@
 #define AM_MODE 1
 #define FM_MODE 2
 #define PM_MODE 3
+#define BAM_MODE 7
 //***
 #define SMH     5
 #define UNKNOWN 0
@@ -31,6 +32,7 @@
 #define FM_BUTTON  1<<PD3
 #define PM_BUTTON  1<<PD4
 #define SMH_BUTTON 1<<PD5
+#define BAM_BUTTON  1<<PD6
 
 volatile char pindState;
 volatile char mode;
@@ -51,6 +53,7 @@ volatile unsigned char infFreq;
 		case FM_BUTTON: return FM_MODE;
 		case PM_BUTTON: return PM_MODE;
 		case SMH_BUTTON: return SMH;
+		case BAM_BUTTON: return BAM_MODE;
 		default: return UNKNOWN;
 	}
 }
