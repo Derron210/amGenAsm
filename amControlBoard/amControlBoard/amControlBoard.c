@@ -4,8 +4,9 @@
  * Created: 22.11.2016 16:48:20
  *  Author: Derron
  */ 
-#define F_CPU 16000000UL			//Частота микроконтроллера
-#define UARTRATE 103//51
+
+#define F_CPU 12000000UL			//Частота микроконтроллера
+#define UARTRATE (F_CPU/16)/9600-1			//FCPU/(16*BUADRATE)-1
 
 #include <avr/io.h>
 #include <util/delay.h>
