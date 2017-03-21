@@ -43,6 +43,7 @@ SINAR:
 .def	COUNR = R8						;Исп. для установки вых. значения прямоуг. сигнала, если COUNR >= SQLER ->1, else ->0
 .def	SQLER =	R9						;Значение скважности прямоуг. сигнала
 .def	PARAR = R10						;Дополнительный параметры 
+.def	OFFSR = R11
 .def	STATR = R15						;Выбор источника информационного сигнала
 .def	GENI1 = R16						;Три регистра общего назначения для ПРЕРЫВАНИЙ
 .def	GENI2 = R17
@@ -80,6 +81,13 @@ lm_ov_pos_sm:
 	ldi		@0,		127
 	rjmp	lm_ov_ext
 lm_ov_ext:
+.endm
+
+.macro SIGNAL_OFFSET		;@0 - Знач. амлитуды, @2 - значение смещения
+	add		@0,		@1
+	brcc	LM_OV_EX
+	ldi		@0,		255
+LM_OV_EX:
 .endm
 
 START:
@@ -121,6 +129,7 @@ START:
 	mov		T1NVR,	GENR1
 	mov		SIGAR,	GENR1
 	mov		T2NVR,	GENR1
+	mov		OFFSR,  NULL
 
 	ldi		GENR1,	255
 	mov		CARAR,	GENR1

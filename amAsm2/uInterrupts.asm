@@ -11,6 +11,8 @@ AM_GEN:				;Обработка прерывания таймера
 	andi	YL,		ARRAY_SIZE-1				
 	ld		GENI1,	Y+				
 
+	SIGNAL_OFFSET	GENI1,	OFFSR
+
 	mov		GENI2,	MSIGR												;Внешний сигнал считывается в цикле с АЦП или в другом прерывании если сигнал внутрений
 
 	mulsu   GENI1,	GENI2												;Перемножим значение инф. сигнала (беззнаковый) на значение несущей (знаковый)
@@ -162,6 +164,7 @@ UEXIT:
 ; ;//			31:n    - записать частоту несущей (T1NVR (OCR1A))
 ; ;//			32:n	- записать частоту инф.сигнала (T2NVR (OCR2))
 ; ;//			33:n	- записать амплитуду внутреннего инф. сигнала (SIGAR)
+; ;//			34:n	- записать смещние несущей сигнала (OFFSR) (Пока только для АМ)
 
 USART_RX:
 USART_RECV1:							;//Считываем 1ый байт
@@ -209,8 +212,10 @@ SKTP:
 
 	cp		GENI1,	GENI3				;Проверяем контрольную сумму
 	pop		GENI1
-	BRNE	INCORRECT_CHECKSUM			;Если не совпала, выходим
+	BREQ	go_next_to_switch			;В противном случае будет Relative jump out of range
+	rjmp	INCORRECT_CHECKSUM			;Если не совпала, выходим
 
+go_next_to_switch:
 	cpi		GENI1,	22
 	BREQ	setdMOde
 
@@ -229,15 +234,11 @@ SKTP:
 	cpi		GENI1,	33
 	breq	writeSIGAR
 
+	cpi		GENI1,	34
+	breq	writeOFFSR
+
 	ldi		GENI1,	2					;Неизвестная команда
 	rjmp INT_PREP_EX
-
-setSigGenMode:
-	rcall STOP_ALL	
-	andi	GENI2,	0b01111111
-	mov		GENR1,	GENI2
-	UART_SEND		GENI1
-	rjmp	dmode6
 
 setdMode:
 	rcall STOP_ALL					;Останавливаем все таймеры
@@ -280,10 +281,12 @@ dmd6:
 rjmp dmode1
 
 writeCARAR:
+	mov	GENI1,	GENI2
 	mov		CARAR,	GENI2
 	rjmp	INT_PREP_EX
 
 writeT1NVR:
+	mov	GENI1,	GENI2
 	mov	T1NVR,	GENI2
 	rjmp	INT_PREP_EX
 
@@ -295,8 +298,19 @@ writeT2NVR:
 writeSIGAR:
 	mov	GENI1,	GENI2
 	mov	SIGAR,	GENI2
-
 	rjmp	UR1_EXIT
+
+writeOFFSR:
+	mov	GENI1,	GENI2
+	mov	OFFSR,  GENI2
+	rjmp	UR1_EXIT
+
+setSigGenMode:
+	rcall STOP_ALL	
+	andi	GENI2,	0b01111111
+	mov		GENR1,	GENI2
+	UART_SEND		GENI1
+	rjmp	dmode6
 
 INCORRECT_CHECKSUM:					;Ошибка - контрольная сумма не совпала
 	ldi	GENI1,		3

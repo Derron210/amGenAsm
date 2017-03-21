@@ -18,6 +18,7 @@
 #define CAR_FREQ 31
 #define INF_FREQ 32
 #define INF_AMPL 33
+#define CAR_OFFSET 34
 
 //Режимы
 #define AM_MODE 1
@@ -43,6 +44,7 @@ volatile unsigned char carAmpl;
 volatile unsigned char carFreq;
 volatile unsigned char infAmpl;
 volatile unsigned char infFreq;
+volatile unsigned char carOffset;
 
  char getMode(char val)
 {
@@ -144,6 +146,11 @@ int main(void)
 		if((tempr > infFreq+10)||(tempr<infFreq-10)) {
 			sendCommand(INF_FREQ, tempr);
 			infFreq = tempr;
+		}
+		tempr = readADC(PINC0);
+		if((tempr > carOffset+10)||(tempr<carOffset-10)) {
+			sendCommand(CAR_OFFSET, tempr);
+			carOffset = tempr;
 		}
     }
 }
