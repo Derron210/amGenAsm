@@ -84,9 +84,14 @@ lm_ov_ext:
 .endm
 
 .macro SIGNAL_OFFSET		;@0 - Знач. амлитуды, @2 - значение смещения
+	tst		@0		
+	BRMI		LM_MINUS
+	cpi		@0,		127
 	add		@0,		@1
 	brcc	LM_OV_EX
-	ldi		@0,		255
+	ldi		@0,		127
+	rjmp		LM_OV_EX
+LM_MINUS:
 LM_OV_EX:
 .endm
 
@@ -126,6 +131,9 @@ START:
 	lsr		GENR1
 	sts		VARIANT,	GENR1
 
+	ldi		GENR1,	127
+	
+	mov		CARAR,	GENR1
 	mov		T1NVR,	GENR1
 	mov		SIGAR,	GENR1
 	mov		T2NVR,	GENR1
