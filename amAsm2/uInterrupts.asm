@@ -11,8 +11,6 @@ AM_GEN:				;Обработка прерывания таймера
 	andi	YL,		ARRAY_SIZE-1				
 	ld		GENI1,	Y+				
 
-	SIGNAL_OFFSET	GENI1,	OFFSR
-
 	mov		GENI2,	MSIGR												;Внешний сигнал считывается в цикле с АЦП или в другом прерывании если сигнал внутрений
 
 	mulsu   GENI1,	GENI2												;Перемножим значение инф. сигнала (беззнаковый) на значение несущей (знаковый)
@@ -92,6 +90,9 @@ rjmp int_tm1_exit
 int_tm1_exit:
 	ldi		GENI2,	128
 	add		GENI1,	GENI2
+
+		SIGNAL_OFFSET	GENI1,	OFFSR
+
 	lsr		GENI1
 	lsr		GENI1														;Два раза поделим на 2, т.к. PB7 и PB6 не используются
 	out		PORTB,	GENI1

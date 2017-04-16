@@ -30,7 +30,7 @@
 #define UNKNOWN 0
 
 //Кнопки
-#define AM_BUTTON  1<<PIND2
+#define AM_BUTTON  1<<PD2
 #define FM_BUTTON  1<<PD3
 #define PM_BUTTON  1<<PD4
 #define SMH_BUTTON 1<<PD5

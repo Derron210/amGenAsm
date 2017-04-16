@@ -84,14 +84,11 @@ lm_ov_ext:
 .endm
 
 .macro SIGNAL_OFFSET		;@0 - Знач. амлитуды, @2 - значение смещения
-	tst		@0		
-	BRMI		LM_MINUS
-	cpi		@0,		127
 	add		@0,		@1
-	brcc	LM_OV_EX
-	ldi		@0,		127
+	BRCS	LM_MINUS
 	rjmp		LM_OV_EX
 LM_MINUS:
+	ldi	@0,	255
 LM_OV_EX:
 .endm
 
