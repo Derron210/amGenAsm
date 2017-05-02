@@ -152,6 +152,7 @@
     <Component class="javax.swing.JSlider" name="sl_genFreq">
       <Properties>
         <Property name="maximum" type="int" value="200"/>
+        <Property name="value" type="int" value="60"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderChange"/>
@@ -160,12 +161,16 @@
     <Component class="javax.swing.JSlider" name="sl_genAmp">
       <Properties>
         <Property name="maximum" type="int" value="127"/>
+        <Property name="value" type="int" value="60"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JSlider" name="sl_infFreq">
+      <Properties>
+        <Property name="value" type="int" value="60"/>
+      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderChange"/>
       </Events>
@@ -173,6 +178,7 @@
     <Component class="javax.swing.JSlider" name="sl_infAmp">
       <Properties>
         <Property name="maximum" type="int" value="127"/>
+        <Property name="value" type="int" value="60"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderChange"/>

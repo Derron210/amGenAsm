@@ -99,6 +99,7 @@ public class mainForm extends javax.swing.JFrame {
         });
 
         sl_genFreq.setMaximum(200);
+        sl_genFreq.setValue(60);
         sl_genFreq.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderChange(evt);
@@ -106,12 +107,14 @@ public class mainForm extends javax.swing.JFrame {
         });
 
         sl_genAmp.setMaximum(127);
+        sl_genAmp.setValue(60);
         sl_genAmp.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderChange(evt);
             }
         });
 
+        sl_infFreq.setValue(60);
         sl_infFreq.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderChange(evt);
@@ -119,6 +122,7 @@ public class mainForm extends javax.swing.JFrame {
         });
 
         sl_infAmp.setMaximum(127);
+        sl_infAmp.setValue(60);
         sl_infAmp.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderChange(evt);
@@ -282,6 +286,10 @@ public class mainForm extends javax.swing.JFrame {
             dc = new devConnector((String) portsBox.getSelectedItem());
             System.out.println("Port opened");
             dc.sendCmd(dc.SETMODE, dc.AM_MODE);
+            dc.sendCmd(dc.SET_INF_AMP, 60);
+            dc.sendCmd(dc.SET_GEN_FREQ, 60);
+            dc.sendCmd(dc.SET_GEN_AMP, 60);
+            dc.sendCmd(dc.SET_INF_FREQ, 60);
             System.out.println("Connection established");
         } catch (SerialPortException ex) {
             Logger.getLogger(mainForm.class.getName()).log(Level.SEVERE, null, ex);

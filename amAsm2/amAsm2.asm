@@ -128,16 +128,13 @@ START:
 	lsr		GENR1
 	sts		VARIANT,	GENR1
 
-	ldi		GENR1,	127
+	ldi		GENR1,	100
 	
 	mov		CARAR,	GENR1
 	mov		T1NVR,	GENR1
 	mov		SIGAR,	GENR1
 	mov		T2NVR,	GENR1
 	mov		OFFSR,  NULL
-
-	ldi		GENR1,	255
-	mov		CARAR,	GENR1
 
 	ldi		GENR1, 3
 	clr		BUFPR
