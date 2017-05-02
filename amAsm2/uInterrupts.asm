@@ -91,8 +91,7 @@ int_tm1_exit:
 	ldi		GENI2,	128
 	add		GENI1,	GENI2
 
-		SIGNAL_OFFSET	GENI1,	OFFSR
-
+	SIGNAL_OFFSET	GENI1,	OFFSR
 	lsr		GENI1
 	lsr		GENI1														;Два раза поделим на 2, т.к. PB7 и PB6 не используются
 	out		PORTB,	GENI1

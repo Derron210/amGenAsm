@@ -148,14 +148,14 @@ START:
 ;Выключает все таймеры, и АЦП
 ;***********************************
 STOP_ALL:
-	ldi GENR1,0
-	out TCCR0,GENR1
-	out TCCR1A,GENR1
-	out TCCR1B,GENR1
-	out TCCR2, GENR1
-	out ADMUX,GENR1
-	out ADCSRA,GENR1
-	out TIMSK,GENR1
+	mov	PARAR,	NULL
+	out TCCR0,	NULL
+	out TCCR1A,	NULL
+	out TCCR1B,	NULL
+	out TCCR2,	NULL
+	out ADMUX,	NULL
+	out ADCSRA,	NULL
+	out TIMSK,	NULL
 ret
 ;***********************************
 

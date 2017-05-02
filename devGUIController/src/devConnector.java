@@ -18,11 +18,13 @@ public class devConnector
         public final int SET_GEN_AMP = 30;
         public final int SET_INF_FREQ = 32;
         public final int SET_INF_AMP = 33;
+        public final int SET_OFFSET = 34;
         
         public final int AM_MODE = 1;
         public final int FM_MODE = 2;
         public final int PM_MODE = 3;
         public final int SMH     = 5;
+        public final int BAM_MODE = 7;
         
 	private SerialPort port;
         
