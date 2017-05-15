@@ -127,7 +127,7 @@ int main(void)
 			}
 		}
 		unsigned char tempr;
-		tempr = readADC(PINC4);
+		tempr = readADC(PINC4) /2;
 		if((tempr > carAmpl+10)||(tempr<carAmpl-10)) { 
 			sendCommand(CAR_AMPL, tempr);
 			carAmpl = tempr;
@@ -137,17 +137,17 @@ int main(void)
 			sendCommand(CAR_FREQ, tempr);
 			carFreq = tempr;
 		}		
-		tempr = readADC(PINC2);
+		tempr = readADC(PINC2)/2 ;
 		if((tempr > infAmpl+10)||(tempr<infAmpl-10)) {
 			sendCommand(INF_AMPL, tempr);
 			infAmpl = tempr;
 		}		
-		tempr = readADC(PINC1);
+		tempr = readADC(PINC1) /2;
 		if((tempr > infFreq+10)||(tempr<infFreq-10)) {
 			sendCommand(INF_FREQ, tempr);
 			infFreq = tempr;
 		}
-		tempr = readADC(PINC0);
+		tempr = readADC(PINC0) /2;
 		if((tempr > carOffset+10)||(tempr<carOffset-10)) {
 			sendCommand(CAR_OFFSET, tempr);
 			carOffset = tempr;
