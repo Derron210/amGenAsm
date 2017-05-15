@@ -1,6 +1,4 @@
-/devGUIController/build
-/devGUIController/dist/
-/devGUIController/nbproject/private/
+/devGUIController/target
 /amAsm2.atsuo
 /cmd.exe.lnk
 /amAsm2/Debug/
